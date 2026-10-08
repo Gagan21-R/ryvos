@@ -1,5 +1,7 @@
 # RYVO
 
+*Team **Tech-Architects** · Autonomous AI Resilience Testing Platform*
+
 **Where AI challenges systems, protects them, and learns from every failure.**
 
 Three AI characters run an autonomous resilience-testing loop on a sandboxed digital twin:
