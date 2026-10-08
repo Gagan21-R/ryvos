@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RYVO</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M32 4 8 13v17c0 15 10 26 24 30 14-4 24-15 24-30V13z' fill='%233b82f6'/><path d='M27 22h10v8h8v10h-8v8H27v-8h-8V30h8z' fill='white'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+  <link rel="stylesheet" href="vendor/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- ============ top bar ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs>
+        <path d="M32 4 8 13v17c0 15 10 26 24 30 14-4 24-15 24-30V13z" fill="url(#lg)"/>
+        <path d="M27 22h10v8h8v10h-8v8H27v-8h-8V30h8z" fill="#fff"/>
+      </svg>
+      <div>
+        <div class="brand-name">RYVO</div>
+        <div class="brand-sub">Autonomous red-team vs blue-team AI for critical systems</div>
+      </div>
+    </div>
+
+    <nav class="domain-switch" id="domainSwitch" aria-label="System under test">
+      <span class="indicator" id="domainIndicator"></span>
+    </nav>
+
+    <div class="top-actions">
+      <span class="conn" id="conn"><span class="dot"></span><span id="connText">Connecting…</span></span>
+      <button class="icon-btn" id="pauseBtn" title="Pause / resume the simulation">⏸</button>
+      <label class="switch blue-switch" title="Turn the Blue defender agents on or off">
+        <input type="checkbox" id="blueToggle" checked>
+        <span class="track"><span class="thumb"></span></span>
+        <span class="switch-label">Blue defenders</span>
+      </label>
+      <button class="icon-btn" id="themeBtn" title="Toggle light / dark">☾</button>
+    </div>
+  </header>
+
+  <div class="banner" id="blueOffBanner">⚠️ Blue defenders are OFFLINE: attacks will go unanswered</div>
+
+  <main>
+    <!-- ============ round + scoreboard ============ -->
+    <section class="hero reveal">
+      <div class="round-card card">
+        <div class="round-top">
+          <div>
+            <div class="eyebrow" id="stakeLabel">Lives at stake</div>
+            <h1 id="domainTitle"><span id="domainIcon">🚑</span> <span id="domainName">Emergency response</span></h1>
+          </div>
+          <div class="round-no"><span>Round</span><b id="roundNo">–</b></div>
+        </div>
+        <div class="progress">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+            <div class="attack-mark" id="attackMark" title="Red attacks here"><span>⚡</span></div>
+          </div>
+          <div class="progress-meta">
+            <span class="phase" id="phase">Waiting…</span>
+            <span class="mono" id="clock">t = 0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="versus">
+        <div class="team-card red card" id="redCard">
+          <div class="team-head"><span class="team-dot"></span>RED TEAM · attacker AI</div>
+          <div class="team-main" id="redMain">Waiting for the attack…</div>
+          <div class="chips" id="redChips"></div>
+          <div class="team-foot" id="redFoot">Multi-armed bandit · learns which attack hurts most</div>
+        </div>
+        <div class="vs-badge">VS</div>
+        <div class="team-card blue card" id="blueCard">
+          <div class="team-head"><span class="team-dot"></span>BLUE TEAM · defender AI</div>
+          <div class="team-main" id="blueMain">All systems normal</div>
+          <div class="chips" id="blueChips"></div>
+          <div class="team-foot" id="blueFoot">Monitor → Diagnoser → Fixer · whitelisted fixes only</div>
+        </div>
+      </div>
+
+      <div class="score-card card">
+        <div class="eyebrow">Last round · human impact</div>
+        <div class="score-big"><span id="scoreValue">–</span><small id="scoreUnit"></small></div>
+        <div class="score-label" id="scoreLabel">–</div>
+        <div class="score-compare" id="scoreCompare"></div>
+        <div class="score-row" id="scoreRow"></div>
+      </div>
+    </section>
+
+    <!-- ============ map + agents ============ -->
+    <section class="main-grid">
+      <div class="card map-card reveal">
+        <div id="map"></div>
+        <div class="map-kpis" id="mapKpis"></div>
+        <div class="map-legend" id="mapLegend"></div>
+        <div class="map-incidents" id="mapIncidents"></div>
+      </div>
+
+      <div class="side">
+        <div class="card pipeline-card reveal">
+          <div class="card-title">Agent pipeline <span class="hint">lights up as each agent acts</span></div>
+          <div class="pipeline" id="pipeline"></div>
+        </div>
+        <div class="card feed-card reveal">
+          <div class="card-title">Battle log <span class="hint" id="feedCount"></span></div>
+          <ul class="feed" id="feed"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ attack launcher ============ -->
+    <section class="card launcher reveal">
+      <div class="section-head">
+        <div>
+          <h2>🎯 Attack launcher</h2>
+          <p>Queue a disaster for the next round, or let Red's learning AI pick the weakest spot. Applies to <b id="launcherDomain">–</b>.</p>
+        </div>
+      </div>
+      <div class="launch-grid" id="launchGrid"></div>
+    </section>
+
+    <!-- ============ learning ============ -->
+    <section class="learning reveal">
+      <div class="section-head">
+        <div>
+          <h2>📈 Is everyone learning?</h2>
+          <p>Blue gets faster as its playbook grows. Red shifts to whatever still hurts.</p>
+        </div>
+        <div class="tabs" id="learnTabs"></div>
+      </div>
+      <div class="tiles" id="tiles"></div>
+      <div class="charts">
+        <div class="card chart-card"><div class="card-title" id="c1Title">Headline metric per round</div><div class="chart-box"><canvas id="c1"></canvas></div>
+          <div class="mini-legend"><span><i style="background:var(--blue)"></i>Each round</span><span><i style="background:var(--cyan)"></i>Rolling average</span><span><i style="background:var(--muted)"></i>Normal day (no attack)</span><span><i style="background:var(--red)"></i>Blue switched off</span></div></div>
+        <div class="card chart-card"><div class="card-title">Blue recovery time per round <span class="hint" id="c2Hint"></span></div><div class="chart-box"><canvas id="c2"></canvas></div>
+          <div class="mini-legend"><span><i style="background:var(--muted)"></i>Investigated from scratch</span><span><i style="background:var(--teal)"></i>Answered from playbook</span><span><i style="background:var(--red)"></i>Blue switched off</span></div></div>
+        <div class="card chart-card"><div class="card-title">Red's attack choices over time <span class="hint">bigger and brighter = more damage</span></div><div class="chart-box"><canvas id="c3"></canvas></div></div>
+        <div class="card chart-card"><div class="card-title">Red's current belief <span class="hint">expected damage per attack (Q-value)</span></div><div class="chart-box"><canvas id="c4"></canvas></div></div>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">📘 Blue's playbook <span class="hint">symptom → fix recipe that worked</span></div>
+          <div class="table-wrap"><table class="playbook" id="playbook"></table></div>
+        </div>
+        <div class="card">
+          <div class="card-title">📝 Postmortems <span class="hint">written automatically after each round</span></div>
+          <div class="reports" id="reports"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ how it works ============ -->
+    <section class="card how reveal">
+      <div class="section-head"><div><h2>⚙️ How it works</h2><p>8 systems talking only through a Redis event bus. No agent calls another directly.</p></div></div>
+      <div class="flow">
+        <div class="flow-node twin"><b>A·B·C</b><span>Digital twin</span><small>city / platform + its services + chaos hooks</small></div>
+        <div class="flow-arrow">⇄</div>
+        <div class="flow-node bus"><b>D</b><span>Event bus</span><small>Redis pub/sub · 9 channels</small></div>
+        <div class="flow-arrow">⇄</div>
+        <div class="flow-stack">
+          <div class="flow-node red"><b>E</b><span>Red team</span><small>bandit strategist · executor · scenarios</small></div>
+          <div class="flow-node blue"><b>F</b><span>Blue team</span><small>monitor → diagnoser → whitelisted fixer</small></div>
+          <div class="flow-node learn"><b>G</b><span>Learning core</span><small>referee · postmortem · playbook memory</small></div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node dash"><b>H</b><span>This dashboard</span><small>live stream · controls · learning graphs</small></div>
+      </div>
+    </section>
+
+    <footer>
+      <span>🛡️ <b>Disasters shouldn't be the first time your system gets tested.</b></span>
+      <span class="muted">RYVO · Agentic AI track</span>
+    </footer>
+  </main>
+
+  <div class="toasts" id="toasts"></div>
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <h3>Reset all learning?</h3>
+      <p>This clears Blue's playbook, Red's bandit memory and every learning graph. The arena keeps running.</p>
+      <div class="modal-actions"><button class="btn ghost" id="modalCancel">Cancel</button><button class="btn danger" id="modalOk">Reset</button></div>
+    </div>
+  </div>
+
+  <script src="vendor/leaflet.js"></script>
+  <script src="vendor/chart.umd.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

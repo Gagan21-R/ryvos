@@ -1,0 +1,188 @@
+{
+  "emergency:dispatch_backlog+high_call_rate": {
+    "domain": "emergency",
+    "symptom": "dispatch_backlog+high_call_rate",
+    "fixes": [
+      "surge_mode"
+    ],
+    "successes": 314,
+    "failed_fixes": {
+      "restart_dispatch": 12,
+      "surge_mode": 2
+    },
+    "avg_recovery_ticks": 4.2,
+    "last_round": 640
+  },
+  "food:order_backlog+high_order_rate": {
+    "domain": "food",
+    "symptom": "order_backlog+high_order_rate",
+    "fixes": [
+      "batch_orders"
+    ],
+    "successes": 23,
+    "failed_fixes": {
+      "reassign_riders": 1
+    },
+    "avg_recovery_ticks": 6.7,
+    "last_round": 623
+  },
+  "food:eta_breaches": {
+    "domain": "food",
+    "symptom": "eta_breaches",
+    "fixes": [
+      "extend_eta_notify"
+    ],
+    "successes": 118,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 2.1,
+    "last_round": 641
+  },
+  "upi:high_failure_rate+one_bank": {
+    "domain": "upi",
+    "symptom": "high_failure_rate+one_bank",
+    "fixes": [
+      "route_to_healthy_bank"
+    ],
+    "successes": 7,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 9.8,
+    "last_round": 527
+  },
+  "emergency:gps_stuck": {
+    "domain": "emergency",
+    "symptom": "gps_stuck",
+    "fixes": [
+      "distrust_gps"
+    ],
+    "successes": 23,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 2.1,
+    "last_round": 561
+  },
+  "food:assignment_slow": {
+    "domain": "food",
+    "symptom": "assignment_slow",
+    "fixes": [
+      "cached_routes"
+    ],
+    "successes": 8,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 2.3,
+    "last_round": 630
+  },
+  "upi:double_debits": {
+    "domain": "upi",
+    "symptom": "double_debits",
+    "fixes": [
+      "idempotency_check"
+    ],
+    "successes": 13,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 2.1,
+    "last_round": 642
+  },
+  "emergency:sms_failing": {
+    "domain": "emergency",
+    "symptom": "sms_failing",
+    "fixes": [
+      "backup_sms"
+    ],
+    "successes": 20,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 2.1,
+    "last_round": 634
+  },
+  "food:orders_unacknowledged": {
+    "domain": "food",
+    "symptom": "orders_unacknowledged",
+    "fixes": [
+      "phone_restaurants"
+    ],
+    "successes": 7,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 2.4,
+    "last_round": 597
+  },
+  "upi:fraud_check_backlog+few_devices": {
+    "domain": "upi",
+    "symptom": "fraud_check_backlog+few_devices",
+    "fixes": [
+      "throttle_bot"
+    ],
+    "successes": 95,
+    "failed_fixes": {
+      "queue_rate_limit": 1
+    },
+    "avg_recovery_ticks": 2.1,
+    "last_round": 639
+  },
+  "emergency:dispatch_backlog": {
+    "domain": "emergency",
+    "symptom": "dispatch_backlog",
+    "fixes": [
+      "restart_dispatch"
+    ],
+    "successes": 24,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 3.1,
+    "last_round": 556
+  },
+  "food:rider_shortage": {
+    "domain": "food",
+    "symptom": "rider_shortage",
+    "fixes": [
+      "reassign_riders"
+    ],
+    "successes": 126,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 2.1,
+    "last_round": 641
+  },
+  "upi:high_failure_rate+traffic_spike": {
+    "domain": "upi",
+    "symptom": "high_failure_rate+traffic_spike",
+    "fixes": [
+      "queue_rate_limit"
+    ],
+    "successes": 7,
+    "failed_fixes": {
+      "route_to_healthy_bank": 1,
+      "queue_rate_limit": 1
+    },
+    "avg_recovery_ticks": 14.0,
+    "last_round": 510
+  },
+  "emergency:bed_feed_stale": {
+    "domain": "emergency",
+    "symptom": "bed_feed_stale",
+    "fixes": [
+      "skip_stale_hospitals"
+    ],
+    "successes": 13,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 2.1,
+    "last_round": 529
+  },
+  "food:order_backlog": {
+    "domain": "food",
+    "symptom": "order_backlog",
+    "fixes": [
+      "batch_orders"
+    ],
+    "successes": 15,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 6.6,
+    "last_round": 616
+  },
+  "food:coverage_mismatch": {
+    "domain": "food",
+    "symptom": "coverage_mismatch",
+    "fixes": [
+      "restore_zone_config"
+    ],
+    "successes": 17,
+    "failed_fixes": {},
+    "avg_recovery_ticks": 2.1,
+    "last_round": 622
+  }
+}

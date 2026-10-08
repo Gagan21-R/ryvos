@@ -1,0 +1,67 @@
+{
+  "emergency": {
+    "q": {
+      "freeze_gps": 0.074,
+      "stale_beds": 0.06,
+      "kill_sms": 0.38,
+      "call_surge": 0.415,
+      "slow_dispatch": 0.199
+    },
+    "n": {
+      "freeze_gps": 16,
+      "stale_beds": 12,
+      "kill_sms": 14,
+      "call_surge": 284,
+      "slow_dispatch": 13
+    },
+    "last": {
+      "slow_dispatch": 355,
+      "call_surge": 362,
+      "kill_sms": 360,
+      "freeze_gps": 359,
+      "stale_beds": 344
+    }
+  },
+  "food": {
+    "q": {
+      "heavy_rain": 0.461,
+      "tablet_offline": 0.002,
+      "maps_slow": 0.001,
+      "festival_surge": 0.375,
+      "coverage_drift": 0.085
+    },
+    "n": {
+      "heavy_rain": 114,
+      "tablet_offline": 4,
+      "maps_slow": 7,
+      "festival_surge": 3,
+      "coverage_drift": 4
+    },
+    "last": {
+      "coverage_drift": 133,
+      "heavy_rain": 146,
+      "maps_slow": 141,
+      "tablet_offline": 108,
+      "festival_surge": 130
+    }
+  },
+  "upi": {
+    "q": {
+      "bank_slow": 0.118,
+      "diwali_spike": 0.09,
+      "duplicate_storm": 0.123,
+      "fraud_bot_burst": 0.166
+    },
+    "n": {
+      "bank_slow": 5,
+      "diwali_spike": 6,
+      "duplicate_storm": 11,
+      "fraud_bot_burst": 95
+    },
+    "last": {
+      "fraud_bot_burst": 128,
+      "duplicate_storm": 115,
+      "diwali_spike": 109
+    }
+  }
+}

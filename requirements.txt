@@ -1,0 +1,13 @@
+# RYVO backend + agents
+redis>=5
+fastapi>=0.110
+uvicorn>=0.29
+pydantic>=2
+# tests (fastapi.testclient)
+httpx2
+# optional: record the demo video (python -m tools.record_demo)
+websocket-client
+imageio-ffmpeg
+# optional: old Streamlit dashboard (python run_all.py --streamlit)
+streamlit>=1.40
+plotly>=5.24

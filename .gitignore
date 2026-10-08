@@ -1,0 +1,12 @@
+# dependencies and builds
+node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+.venv/
+venv/
+# runtime files rewritten every tick (learning history in data/ is kept)
+data/live.json
+data/learn.json
+*.log
+.env

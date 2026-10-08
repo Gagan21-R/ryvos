@@ -1,0 +1,7 @@
+# Render blueprint: New > Blueprint > pick this repo. Free plan sleeps after ~15 min idle; first visit then takes ~1 min.
+services:
+  - type: web
+    name: ryvo
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
