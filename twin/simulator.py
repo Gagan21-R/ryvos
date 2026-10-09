@@ -117,6 +117,9 @@ def main():
         if aborted:
             continue
         time.sleep(max(0.3, config.TICK_SEC * 3))   # breathing room so scores land before the next round
+        while paused and not request["start"]:      # stopped: stay on this scenario until Play (or a new round is started)
+            drain(None, round_no, did)
+            time.sleep(0.1)
         if not autoplay:                            # demo mode: wait for "Start autonomous round"
             bus.publish(names.CITY_EVENTS, {"type": "arena_idle", "t": 0, "round": round_no, "domain": did})
             while not request["start"]:

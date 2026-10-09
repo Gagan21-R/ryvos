@@ -5,26 +5,28 @@
     "fixes": [
       "surge_mode"
     ],
-    "successes": 314,
+    "successes": 411,
     "failed_fixes": {
-      "restart_dispatch": 12,
+      "restart_dispatch": 20,
       "surge_mode": 2
     },
-    "avg_recovery_ticks": 4.2,
-    "last_round": 640
+    "avg_recovery_ticks": 2.1,
+    "last_round": 934
   },
   "food:order_backlog+high_order_rate": {
     "domain": "food",
     "symptom": "order_backlog+high_order_rate",
     "fixes": [
+      "reassign_riders",
       "batch_orders"
     ],
-    "successes": 23,
+    "successes": 61,
     "failed_fixes": {
-      "reassign_riders": 1
+      "reassign_riders": 1,
+      "batch_orders": 2
     },
-    "avg_recovery_ticks": 6.7,
-    "last_round": 623
+    "avg_recovery_ticks": 3.7,
+    "last_round": 926
   },
   "food:eta_breaches": {
     "domain": "food",
@@ -32,10 +34,10 @@
     "fixes": [
       "extend_eta_notify"
     ],
-    "successes": 118,
+    "successes": 206,
     "failed_fixes": {},
     "avg_recovery_ticks": 2.1,
-    "last_round": 641
+    "last_round": 935
   },
   "upi:high_failure_rate+one_bank": {
     "domain": "upi",
@@ -43,10 +45,10 @@
     "fixes": [
       "route_to_healthy_bank"
     ],
-    "successes": 7,
+    "successes": 11,
     "failed_fixes": {},
-    "avg_recovery_ticks": 9.8,
-    "last_round": 527
+    "avg_recovery_ticks": 9.7,
+    "last_round": 876
   },
   "emergency:gps_stuck": {
     "domain": "emergency",
@@ -54,10 +56,10 @@
     "fixes": [
       "distrust_gps"
     ],
-    "successes": 23,
+    "successes": 30,
     "failed_fixes": {},
     "avg_recovery_ticks": 2.1,
-    "last_round": 561
+    "last_round": 886
   },
   "food:assignment_slow": {
     "domain": "food",
@@ -65,10 +67,10 @@
     "fixes": [
       "cached_routes"
     ],
-    "successes": 8,
+    "successes": 13,
     "failed_fixes": {},
-    "avg_recovery_ticks": 2.3,
-    "last_round": 630
+    "avg_recovery_ticks": 2.1,
+    "last_round": 932
   },
   "upi:double_debits": {
     "domain": "upi",
@@ -76,10 +78,10 @@
     "fixes": [
       "idempotency_check"
     ],
-    "successes": 13,
+    "successes": 16,
     "failed_fixes": {},
     "avg_recovery_ticks": 2.1,
-    "last_round": 642
+    "last_round": 804
   },
   "emergency:sms_failing": {
     "domain": "emergency",
@@ -87,10 +89,10 @@
     "fixes": [
       "backup_sms"
     ],
-    "successes": 20,
+    "successes": 26,
     "failed_fixes": {},
     "avg_recovery_ticks": 2.1,
-    "last_round": 634
+    "last_round": 919
   },
   "food:orders_unacknowledged": {
     "domain": "food",
@@ -98,10 +100,10 @@
     "fixes": [
       "phone_restaurants"
     ],
-    "successes": 7,
+    "successes": 10,
     "failed_fixes": {},
-    "avg_recovery_ticks": 2.4,
-    "last_round": 597
+    "avg_recovery_ticks": 2.1,
+    "last_round": 875
   },
   "upi:fraud_check_backlog+few_devices": {
     "domain": "upi",
@@ -109,12 +111,12 @@
     "fixes": [
       "throttle_bot"
     ],
-    "successes": 95,
+    "successes": 179,
     "failed_fixes": {
       "queue_rate_limit": 1
     },
     "avg_recovery_ticks": 2.1,
-    "last_round": 639
+    "last_round": 933
   },
   "emergency:dispatch_backlog": {
     "domain": "emergency",
@@ -122,10 +124,10 @@
     "fixes": [
       "restart_dispatch"
     ],
-    "successes": 24,
+    "successes": 29,
     "failed_fixes": {},
     "avg_recovery_ticks": 3.1,
-    "last_round": 556
+    "last_round": 936
   },
   "food:rider_shortage": {
     "domain": "food",
@@ -133,10 +135,10 @@
     "fixes": [
       "reassign_riders"
     ],
-    "successes": 126,
+    "successes": 197,
     "failed_fixes": {},
     "avg_recovery_ticks": 2.1,
-    "last_round": 641
+    "last_round": 935
   },
   "upi:high_failure_rate+traffic_spike": {
     "domain": "upi",
@@ -144,13 +146,13 @@
     "fixes": [
       "queue_rate_limit"
     ],
-    "successes": 7,
+    "successes": 13,
     "failed_fixes": {
       "route_to_healthy_bank": 1,
       "queue_rate_limit": 1
     },
-    "avg_recovery_ticks": 14.0,
-    "last_round": 510
+    "avg_recovery_ticks": 6.0,
+    "last_round": 915
   },
   "emergency:bed_feed_stale": {
     "domain": "emergency",
@@ -158,10 +160,10 @@
     "fixes": [
       "skip_stale_hospitals"
     ],
-    "successes": 13,
+    "successes": 16,
     "failed_fixes": {},
     "avg_recovery_ticks": 2.1,
-    "last_round": 529
+    "last_round": 850
   },
   "food:order_backlog": {
     "domain": "food",
@@ -169,10 +171,10 @@
     "fixes": [
       "batch_orders"
     ],
-    "successes": 15,
+    "successes": 25,
     "failed_fixes": {},
-    "avg_recovery_ticks": 6.6,
-    "last_round": 616
+    "avg_recovery_ticks": 4.8,
+    "last_round": 842
   },
   "food:coverage_mismatch": {
     "domain": "food",
@@ -180,9 +182,9 @@
     "fixes": [
       "restore_zone_config"
     ],
-    "successes": 17,
+    "successes": 25,
     "failed_fixes": {},
     "avg_recovery_ticks": 2.1,
-    "last_round": 622
+    "last_round": 935
   }
 }

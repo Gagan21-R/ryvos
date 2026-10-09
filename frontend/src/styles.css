@@ -162,6 +162,7 @@ button { font: inherit; color: inherit; }
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
   opacity: 0; transition: opacity 0.35s; }
 .domain-pick button.live::before { opacity: 1; animation: sweep 2.8s linear infinite; }
+.domain-pick button.frozen::before { animation-play-state: paused; }
 @property --sweep { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 @keyframes sweep { to { --sweep: 360deg; } }
 .domain-pick .scene { display: block; width: 100%; height: auto; margin-bottom: 8px; border-radius: 12px; }

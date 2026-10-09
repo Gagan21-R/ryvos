@@ -20,14 +20,14 @@ const SYSTEMS = [
 ];
 const ACCENT = { emergency: "#e5194f", food: "#0a8fc9", upi: "#7a4dff" };
 
-function ScenarioCard({ id, ic, name, sub, selected, onSelect }) {
+function ScenarioCard({ id, ic, name, sub, selected, onSelect, frozen }) {
   const [hover, setHover] = useState(false);
   const active = hover || selected;
   return (
-    <button className={`${selected ? "sel" : ""} ${active ? "live" : ""}`} style={{ "--acc": ACCENT[id] }} onClick={onSelect}
+    <button className={`${selected ? "sel" : ""} ${active ? "live" : ""} ${frozen ? "frozen" : ""}`} style={{ "--acc": ACCENT[id] }} onClick={onSelect}
       aria-pressed={selected} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       onFocus={() => setHover(true)} onBlur={() => setHover(false)}>
-      <ScenarioScene kind={id} active={active} />
+      <ScenarioScene kind={id} active={active} frozen={frozen} />
       <b><span aria-hidden="true">{ic}</span> {name}</b><small>{sub}</small>
     </button>
   );
@@ -55,7 +55,7 @@ export default function Overview() {
             <div className="eyebrow">Choose a system</div>
             <div className="domain-pick">
               {SYSTEMS.map(([id, ic, name, sub]) => (
-                <ScenarioCard key={id} id={id} ic={ic} name={name} sub={sub} selected={sys === id} onSelect={() => setSys(id)} />
+                <ScenarioCard key={id} id={id} ic={ic} name={name} sub={sub} selected={sys === id} onSelect={() => setSys(id)} frozen={!!live?.status?.paused} />
               ))}
             </div>
             <div className="cta-row">

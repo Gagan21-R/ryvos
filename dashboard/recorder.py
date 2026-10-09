@@ -131,8 +131,11 @@ def main():
                     st["paused"] = cmd == "pause"
                 elif cmd == "blue":
                     st["blue_enabled"] = bool(m.get("enabled"))
-                elif cmd in ("domain", "start_round") and m.get("domain"):
-                    st["domain_mode"] = m["domain"]
+                elif cmd in ("domain", "start_round"):
+                    if m.get("domain"):
+                        st["domain_mode"] = m["domain"]
+                    if cmd == "start_round":
+                        st["paused"] = False
                 elif cmd == "autoplay":
                     st["autoplay"] = bool(m.get("enabled", True))
                 elif cmd == "reset_learning":

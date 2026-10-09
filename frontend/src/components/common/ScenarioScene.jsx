@@ -5,18 +5,20 @@ import { useEffect, useRef } from "react";
 
 const INK = "#0e0e10";
 
-function useSceneClock(active, restAt) {
+function useSceneClock(active, restAt, frozen) {
   const ref = useRef(null);
   useEffect(() => {
     const svg = ref.current;
     if (!svg?.pauseAnimations) return;
-    if (active) {
+    if (frozen) {
+      svg.pauseAnimations();               // simulation stopped: hold the exact frame
+    } else if (active) {
       svg.unpauseAnimations();
     } else {
       svg.pauseAnimations();
       svg.setCurrentTime(restAt);          // a composed resting frame, not the very first one
     }
-  }, [active, restAt]);
+  }, [active, restAt, frozen]);
   return ref;
 }
 
@@ -45,8 +47,8 @@ function Frame({ id, accent, children }) {
 }
 
 // ---------------------------------------------------------------- 🚑 108 Emergency
-function EmergencyScene({ active }) {
-  const ref = useSceneClock(active, 1.6);
+function EmergencyScene({ active, frozen }) {
+  const ref = useSceneClock(active, 1.6, frozen);
   const route = "M18 64 C 60 64, 70 30, 112 32 S 168 58, 206 34";
   return (
     <svg ref={ref} viewBox="0 0 240 88" className="scene" role="img" aria-label="Ambulance driving a route to an emergency call">
@@ -103,8 +105,8 @@ function EmergencyScene({ active }) {
 }
 
 // ---------------------------------------------------------------- 🛵 Free Delivery
-function DeliveryScene({ active }) {
-  const ref = useSceneClock(active, 1.4);
+function DeliveryScene({ active, frozen }) {
+  const ref = useSceneClock(active, 1.4, frozen);
   const zone = "M22 20 L74 10 L132 16 L192 12 L222 40 L204 74 L140 78 L82 72 L30 66 Z";
   const ride = "M36 56 C 70 58, 86 34, 120 38 S 172 60, 196 44";
   return (
@@ -164,8 +166,8 @@ function DeliveryScene({ active }) {
 }
 
 // ---------------------------------------------------------------- 💳 UPI Payments
-function UpiScene({ active }) {
-  const ref = useSceneClock(active, 0.9);
+function UpiScene({ active, frozen }) {
+  const ref = useSceneClock(active, 0.9, frozen);
   const link = "M44 50 C 70 50, 90 26, 120 26 S 170 50, 196 50";
   return (
     <svg ref={ref} viewBox="0 0 240 88" className="scene" role="img" aria-label="Payment signal travelling from a phone through the gateway to a bank">
@@ -217,8 +219,8 @@ function UpiScene({ active }) {
   );
 }
 
-export default function ScenarioScene({ kind, active }) {
-  if (kind === "emergency") return <EmergencyScene active={active} />;
-  if (kind === "food") return <DeliveryScene active={active} />;
-  return <UpiScene active={active} />;
+export default function ScenarioScene({ kind, active, frozen = false }) {
+  if (kind === "emergency") return <EmergencyScene active={active} frozen={frozen} />;
+  if (kind === "food") return <DeliveryScene active={active} frozen={frozen} />;
+  return <UpiScene active={active} frozen={frozen} />;
 }

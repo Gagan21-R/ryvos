@@ -1,67 +1,68 @@
 {
   "emergency": {
     "q": {
-      "freeze_gps": 0.074,
-      "stale_beds": 0.06,
-      "kill_sms": 0.38,
-      "call_surge": 0.415,
-      "slow_dispatch": 0.199
+      "freeze_gps": 0.104,
+      "stale_beds": 0.028,
+      "kill_sms": 0.053,
+      "call_surge": 0.719,
+      "slow_dispatch": 0.111
     },
     "n": {
-      "freeze_gps": 16,
-      "stale_beds": 12,
-      "kill_sms": 14,
-      "call_surge": 284,
-      "slow_dispatch": 13
+      "freeze_gps": 23,
+      "stale_beds": 15,
+      "kill_sms": 20,
+      "call_surge": 364,
+      "slow_dispatch": 15
     },
     "last": {
-      "slow_dispatch": 355,
-      "call_surge": 362,
-      "kill_sms": 360,
-      "freeze_gps": 359,
-      "stale_beds": 344
+      "slow_dispatch": 441,
+      "call_surge": 460,
+      "kill_sms": 455,
+      "freeze_gps": 444,
+      "stale_beds": 432
     }
   },
   "food": {
     "q": {
-      "heavy_rain": 0.461,
-      "tablet_offline": 0.002,
-      "maps_slow": 0.001,
-      "festival_surge": 0.375,
-      "coverage_drift": 0.085
+      "heavy_rain": 0.495,
+      "tablet_offline": 0.058,
+      "maps_slow": 0.009,
+      "festival_surge": 0.352,
+      "coverage_drift": 0.07
     },
     "n": {
-      "heavy_rain": 114,
-      "tablet_offline": 4,
-      "maps_slow": 7,
-      "festival_surge": 3,
-      "coverage_drift": 4
+      "heavy_rain": 184,
+      "tablet_offline": 7,
+      "maps_slow": 12,
+      "festival_surge": 19,
+      "coverage_drift": 7
     },
     "last": {
-      "coverage_drift": 133,
-      "heavy_rain": 146,
-      "maps_slow": 141,
-      "tablet_offline": 108,
-      "festival_surge": 130
+      "coverage_drift": 179,
+      "heavy_rain": 242,
+      "maps_slow": 243,
+      "tablet_offline": 224,
+      "festival_surge": 241
     }
   },
   "upi": {
     "q": {
-      "bank_slow": 0.118,
-      "diwali_spike": 0.09,
-      "duplicate_storm": 0.123,
-      "fraud_bot_burst": 0.166
+      "bank_slow": 0.123,
+      "diwali_spike": 0.051,
+      "duplicate_storm": 0.043,
+      "fraud_bot_burst": 0.133
     },
     "n": {
-      "bank_slow": 5,
-      "diwali_spike": 6,
-      "duplicate_storm": 11,
-      "fraud_bot_burst": 95
+      "bank_slow": 9,
+      "diwali_spike": 12,
+      "duplicate_storm": 15,
+      "fraud_bot_burst": 179
     },
     "last": {
-      "fraud_bot_burst": 128,
-      "duplicate_storm": 115,
-      "diwali_spike": 109
+      "fraud_bot_burst": 226,
+      "duplicate_storm": 183,
+      "diwali_spike": 220,
+      "bank_slow": 207
     }
   }
 }

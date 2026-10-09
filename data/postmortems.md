@@ -5966,3 +5966,2640 @@
 - **Resilience** 96 → 96.
 - **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
 
+### INC-UPI-0642 · Round 642 · 💳 UPI payments #129
+- **Experiment** (explore): Duplicate-request storm on Ledger.
+- **Detected** double_debits after 3 s.
+- **Diagnosis**: Duplicate requests reaching the ledger (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: idempotency_check · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 13; Money stuck (debited, not confirmed) 6946.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0643 · Round 643 · 🚑 Emergency response (108) #363
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 9 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 12 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 16.2min; Patients sent to full hospitals 0; Critical patients waiting >15 min 5.
+- **Resilience** 89 → 82.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0644 · Round 644 · 🛵 Food delivery #147
+- **Experiment** (explore): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 33.3%; Cancelled orders 0; Avg delivery time 22.4min.
+- **Resilience** 96 → 96.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0645 · Round 645 · 💳 UPI payments #130
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0646 · Round 646 · 🚑 Emergency response (108) #364
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.6min; Patients sent to full hospitals 5; Critical patients waiting >15 min 2.
+- **Resilience** 82 → 87.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0647 · Round 647 · 🛵 Food delivery #148
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + restore_zone_config + extend_eta_notify · MTTR 6 min · RECOVERED.
+- **Impact**: Late orders 43.4%; Cancelled orders 1; Avg delivery time 25.1min.
+- **Resilience** 96 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0648 · Round 648 · 💳 UPI payments #131
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0649 · Round 649 · 🚑 Emergency response (108) #365
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 10 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 92%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 29 min · NOT RECOVERED.
+- **Impact**: Avg ambulance arrival 21.0min; Patients sent to full hospitals 0; Critical patients waiting >15 min 7.
+- **Resilience** 87 → 78.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0650 · Round 650 · 🛵 Food delivery #149
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 7 min · RECOVERED.
+- **Impact**: Late orders 37.5%; Cancelled orders 0; Avg delivery time 23.4min.
+- **Resilience** 94 → 92.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0651 · Round 651 · 💳 UPI payments #132
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0652 · Round 652 · 🚑 Emergency response (108) #366
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.4min; Patients sent to full hospitals 5; Critical patients waiting >15 min 0.
+- **Resilience** 78 → 84.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0653 · Round 653 · 🛵 Food delivery #150
+- **Experiment** (explore): Maps API latency injection on Maps / ETA.
+- **Detected** assignment_slow after 2 min.
+- **Diagnosis**: Slow maps / ETA dependency (AEGIS confidence 100%, ORACLE-validated accuracy 67%).
+- **Recovery**: cached_routes + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 10.2%; Cancelled orders 0; Avg delivery time 19.0min.
+- **Resilience** 92 → 91.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0654 · Round 654 · 💳 UPI payments #133
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0655 · Round 655 · 🚑 Emergency response (108) #367
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 12.0min; Patients sent to full hospitals 4; Critical patients waiting >15 min 0.
+- **Resilience** 84 → 88.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0656 · Round 656 · 🛵 Food delivery #151
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 6 min · RECOVERED.
+- **Impact**: Late orders 47.5%; Cancelled orders 0; Avg delivery time 23.8min.
+- **Resilience** 91 → 91.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0657 · Round 657 · 💳 UPI payments #134
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0658 · Round 658 · 🚑 Emergency response (108) #368
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 7 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 13.7min; Patients sent to full hospitals 0; Critical patients waiting >15 min 2.
+- **Resilience** 88 → 88.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0659 · Round 659 · 🛵 Food delivery #152
+- **Experiment** (explore): Maps API latency injection on Maps / ETA.
+- **Detected** assignment_slow after 2 min.
+- **Diagnosis**: Slow maps / ETA dependency (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: cached_routes · MTTR 2 min · RECOVERED.
+- **Impact**: Late orders 0.0%; Cancelled orders 0; Avg delivery time 17.9min.
+- **Resilience** 91 → 93.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0660 · Round 660 · 💳 UPI payments #135
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0661 · Round 661 · 🚑 Emergency response (108) #369
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 5 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 16.4min; Patients sent to full hospitals 2; Critical patients waiting >15 min 4.
+- **Resilience** 88 → 89.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0662 · Round 662 · 🛵 Food delivery #153
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 19.5%; Cancelled orders 1; Avg delivery time 22.5min.
+- **Resilience** 93 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0663 · Round 663 · 💳 UPI payments #136
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0664 · Round 664 · 🚑 Emergency response (108) #370
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 10.4min; Patients sent to full hospitals 3; Critical patients waiting >15 min 2.
+- **Resilience** 89 → 91.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0665 · Round 665 · 🛵 Food delivery #154
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 8.8%; Cancelled orders 0; Avg delivery time 22.1min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0666 · Round 666 · 💳 UPI payments #137
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0667 · Round 667 · 🚑 Emergency response (108) #371
+- **Experiment** (explore): SMS gateway outage on Notifier (SMS).
+- **Detected** sms_failing after 7 min.
+- **Diagnosis**: SMS gateway outage (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: backup_sms · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 7.9min; Patients sent to full hospitals 0; Critical patients waiting >15 min 0.
+- **Resilience** 91 → 90.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0668 · Round 668 · 🛵 Food delivery #155
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 35.2%; Cancelled orders 0; Avg delivery time 26.4min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0669 · Round 669 · 💳 UPI payments #138
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0670 · Round 670 · 🚑 Emergency response (108) #372
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 12 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 95%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 18 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 15.4min; Patients sent to full hospitals 1; Critical patients waiting >15 min 2.
+- **Resilience** 90 → 80.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0671 · Round 671 · 🛵 Food delivery #156
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 46.8%; Cancelled orders 0; Avg delivery time 26.7min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0672 · Round 672 · 💳 UPI payments #139
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0673 · Round 673 · 🚑 Emergency response (108) #373
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 11 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 22 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 16.9min; Patients sent to full hospitals 0; Critical patients waiting >15 min 4.
+- **Resilience** 80 → 73.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0674 · Round 674 · 🛵 Food delivery #157
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 39.6%; Cancelled orders 0; Avg delivery time 26.4min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0675 · Round 675 · 💳 UPI payments #140
+- **Experiment** (explore): Duplicate-request storm on Ledger.
+- **Detected** double_debits after 3 s.
+- **Diagnosis**: Duplicate requests reaching the ledger (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: idempotency_check · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 12; Money stuck (debited, not confirmed) 6728.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0676 · Round 676 · 🚑 Emergency response (108) #374
+- **Experiment** (explore): Stale bed data on Bed tracker.
+- **Detected** bed_feed_stale after 4 min.
+- **Diagnosis**: Stale bed-availability feed (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: skip_stale_hospitals · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 8.3min; Patients sent to full hospitals 4; Critical patients waiting >15 min 0.
+- **Resilience** 73 → 80.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0677 · Round 677 · 🛵 Food delivery #158
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 24.5%; Cancelled orders 2; Avg delivery time 21.9min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0678 · Round 678 · 💳 UPI payments #141
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0679 · Round 679 · 🚑 Emergency response (108) #375
+- **Experiment** (explore): GPS dead zone on GPS tracker.
+- **Detected** gps_stuck after 9 min.
+- **Diagnosis**: Frozen GPS telemetry (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: distrust_gps · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.3min; Patients sent to full hospitals 2; Critical patients waiting >15 min 2.
+- **Resilience** 80 → 82.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0680 · Round 680 · 🛵 Food delivery #159
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 26.3%; Cancelled orders 0; Avg delivery time 23.5min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0681 · Round 681 · 💳 UPI payments #142
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0682 · Round 682 · 🚑 Emergency response (108) #376
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 6 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 15.9min; Patients sent to full hospitals 1; Critical patients waiting >15 min 4.
+- **Resilience** 82 → 85.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0683 · Round 683 · 🛵 Food delivery #160
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 10 min · RECOVERED.
+- **Impact**: Late orders 49.1%; Cancelled orders 1; Avg delivery time 25.8min.
+- **Resilience** 94 → 92.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0684 · Round 684 · 💳 UPI payments #143
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0685 · Round 685 · 🚑 Emergency response (108) #377
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 3 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 9 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 15.4min; Patients sent to full hospitals 2; Critical patients waiting >15 min 10.
+- **Resilience** 85 → 85.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0686 · Round 686 · 🛵 Food delivery #161
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 23.8%; Cancelled orders 0; Avg delivery time 24.9min.
+- **Resilience** 92 → 93.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0687 · Round 687 · 💳 UPI payments #144
+- **Experiment** (explore): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0688 · Round 688 · 🚑 Emergency response (108) #378
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 7 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 16.5min; Patients sent to full hospitals 0; Critical patients waiting >15 min 6.
+- **Resilience** 85 → 86.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0689 · Round 689 · 🛵 Food delivery #162
+- **Experiment** (explore): Maps API latency injection on Maps / ETA.
+- **Detected** assignment_slow after 2 min.
+- **Diagnosis**: Slow maps / ETA dependency (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: cached_routes · MTTR 2 min · RECOVERED.
+- **Impact**: Late orders 0.0%; Cancelled orders 0; Avg delivery time 19.1min.
+- **Resilience** 93 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0690 · Round 690 · 💳 UPI payments #145
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0691 · Round 691 · 🚑 Emergency response (108) #379
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 4 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.9min; Patients sent to full hospitals 1; Critical patients waiting >15 min 0.
+- **Resilience** 86 → 88.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0692 · Round 692 · 🛵 Food delivery #163
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 6 min · RECOVERED.
+- **Impact**: Late orders 49.0%; Cancelled orders 0; Avg delivery time 24.7min.
+- **Resilience** 94 → 93.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0693 · Round 693 · 💳 UPI payments #146
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0694 · Round 694 · 🚑 Emergency response (108) #380
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 11 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 92%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 17 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 17.3min; Patients sent to full hospitals 1; Critical patients waiting >15 min 6.
+- **Resilience** 88 → 79.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0695 · Round 695 · 🛵 Food delivery #164
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 19.1%; Cancelled orders 0; Avg delivery time 23.2min.
+- **Resilience** 93 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0696 · Round 696 · 💳 UPI payments #147
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0697 · Round 697 · 🚑 Emergency response (108) #381
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 3 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 11 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 18.2min; Patients sent to full hospitals 2; Critical patients waiting >15 min 8.
+- **Resilience** 79 → 81.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0698 · Round 698 · 🛵 Food delivery #165
+- **Experiment** (explore): Free-delivery zone config drift on Delivery zones.
+- **Detected** coverage_mismatch after 5 min.
+- **Diagnosis**: Free-delivery zone misconfigured (config drift) (AEGIS confidence 97%, ORACLE-validated accuracy 100%).
+- **Recovery**: restore_zone_config · MTTR 2 min · RECOVERED.
+- **Impact**: Late orders 0.0%; Cancelled orders 0; Avg delivery time 16.2min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0699 · Round 699 · 💳 UPI payments #148
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0700 · Round 700 · 🚑 Emergency response (108) #382
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 10 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 20.7min; Patients sent to full hospitals 0; Critical patients waiting >15 min 5.
+- **Resilience** 81 → 82.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0701 · Round 701 · 🛵 Food delivery #166
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 46.3%; Cancelled orders 0; Avg delivery time 26.0min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0702 · Round 702 · 💳 UPI payments #149
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0703 · Round 703 · 🚑 Emergency response (108) #383
+- **Experiment** (explore): SMS gateway outage on Notifier (SMS).
+- **Detected** sms_failing after 2 min.
+- **Diagnosis**: SMS gateway outage (AEGIS confidence 94%, ORACLE-validated accuracy 100%).
+- **Recovery**: backup_sms · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 10.6min; Patients sent to full hospitals 1; Critical patients waiting >15 min 1.
+- **Resilience** 82 → 87.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0704 · Round 704 · 🛵 Food delivery #167
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 7 min · RECOVERED.
+- **Impact**: Late orders 41.2%; Cancelled orders 1; Avg delivery time 24.6min.
+- **Resilience** 94 → 92.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0705 · Round 705 · 💳 UPI payments #150
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 4 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0706 · Round 706 · 🚑 Emergency response (108) #384
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 9 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 16.7min; Patients sent to full hospitals 1; Critical patients waiting >15 min 3.
+- **Resilience** 87 → 87.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0707 · Round 707 · 🛵 Food delivery #168
+- **Experiment** (explore): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 13 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 94%, ORACLE-validated accuracy 80%).
+- **Recovery**: batch_orders + reassign_riders + extend_eta_notify · MTTR 15 min · RECOVERED.
+- **Impact**: Late orders 30.1%; Cancelled orders 0; Avg delivery time 23.7min.
+- **Resilience** 92 → 86.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (3 past runs)).
+
+### INC-UPI-0708 · Round 708 · 💳 UPI payments #151
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 4 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0709 · Round 709 · 🚑 Emergency response (108) #385
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.2min; Patients sent to full hospitals 2; Critical patients waiting >15 min 1.
+- **Resilience** 87 → 90.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0710 · Round 710 · 🛵 Food delivery #169
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 31.2%; Cancelled orders 0; Avg delivery time 27.9min.
+- **Resilience** 86 → 89.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (4 past runs)).
+
+### INC-UPI-0711 · Round 711 · 💳 UPI payments #152
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0712 · Round 712 · 🚑 Emergency response (108) #386
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 8.1min; Patients sent to full hospitals 1; Critical patients waiting >15 min 1.
+- **Resilience** 90 → 92.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0713 · Round 713 · 🛵 Food delivery #170
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 35.3%; Cancelled orders 0; Avg delivery time 24.9min.
+- **Resilience** 89 → 91.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (4 past runs)).
+
+### INC-UPI-0714 · Round 714 · 💳 UPI payments #153
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 4 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0715 · Round 715 · 🚑 Emergency response (108) #387
+- **Experiment** (explore): GPS dead zone on GPS tracker.
+- **Detected** gps_stuck after 3 min.
+- **Diagnosis**: Frozen GPS telemetry (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: distrust_gps · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.2min; Patients sent to full hospitals 1; Critical patients waiting >15 min 0.
+- **Resilience** 92 → 93.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0716 · Round 716 · 🛵 Food delivery #171
+- **Experiment** (explore): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 16 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: batch_orders + reassign_riders + extend_eta_notify · MTTR 11 min · RECOVERED.
+- **Impact**: Late orders 29.9%; Cancelled orders 3; Avg delivery time 22.2min.
+- **Resilience** 91 → 85.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (4 past runs)).
+
+### INC-UPI-0717 · Round 717 · 💳 UPI payments #154
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0718 · Round 718 · 🚑 Emergency response (108) #388
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 4 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 13.4min; Patients sent to full hospitals 1; Critical patients waiting >15 min 5.
+- **Resilience** 93 → 93.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0719 · Round 719 · 🛵 Food delivery #172
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + restore_zone_config + extend_eta_notify · MTTR 6 min · RECOVERED.
+- **Impact**: Late orders 40.4%; Cancelled orders 0; Avg delivery time 25.5min.
+- **Resilience** 85 → 87.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (5 past runs)).
+
+### INC-UPI-0720 · Round 720 · 💳 UPI payments #155
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0721 · Round 721 · 🚑 Emergency response (108) #389
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 10 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 15.1min; Patients sent to full hospitals 2; Critical patients waiting >15 min 5.
+- **Resilience** 93 → 90.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0722 · Round 722 · 🛵 Food delivery #173
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders · MTTR 2 min · RECOVERED.
+- **Impact**: Late orders 11.8%; Cancelled orders 0; Avg delivery time 22.1min.
+- **Resilience** 87 → 90.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (5 past runs)).
+
+### INC-UPI-0723 · Round 723 · 💳 UPI payments #156
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0724 · Round 724 · 🚑 Emergency response (108) #390
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 11 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 15.0min; Patients sent to full hospitals 0; Critical patients waiting >15 min 3.
+- **Resilience** 90 → 88.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0725 · Round 725 · 🛵 Food delivery #174
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 21 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 100%, ORACLE-validated accuracy 80%).
+- **Recovery**: batch_orders + reassign_riders + extend_eta_notify · MTTR 11 min · RECOVERED.
+- **Impact**: Late orders 25.8%; Cancelled orders 2; Avg delivery time 21.4min.
+- **Resilience** 90 → 83.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (5 past runs)).
+
+### INC-UPI-0726 · Round 726 · 💳 UPI payments #157
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0727 · Round 727 · 🚑 Emergency response (108) #391
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.1min; Patients sent to full hospitals 2; Critical patients waiting >15 min 0.
+- **Resilience** 88 → 90.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0728 · Round 728 · 🛵 Food delivery #175
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 12 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 97%, ORACLE-validated accuracy 80%).
+- **Recovery**: batch_orders + reassign_riders + extend_eta_notify · MTTR 9 min · RECOVERED.
+- **Impact**: Late orders 27.9%; Cancelled orders 1; Avg delivery time 22.7min.
+- **Resilience** 83 → 82.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (7 past runs)).
+
+### INC-UPI-0729 · Round 729 · 💳 UPI payments #158
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0730 · Round 730 · 🚑 Emergency response (108) #392
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 7 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 15.2min; Patients sent to full hospitals 1; Critical patients waiting >15 min 6.
+- **Resilience** 90 → 89.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0731 · Round 731 · 🛵 Food delivery #176
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 15 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: batch_orders + reassign_riders + extend_eta_notify · MTTR 17 min · RECOVERED.
+- **Impact**: Late orders 23.0%; Cancelled orders 0; Avg delivery time 23.3min.
+- **Resilience** 82 → 78.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (7 past runs)).
+
+### INC-UPI-0732 · Round 732 · 💳 UPI payments #159
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0733 · Round 733 · 🚑 Emergency response (108) #393
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.9min; Patients sent to full hospitals 3; Critical patients waiting >15 min 0.
+- **Resilience** 89 → 91.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0734 · Round 734 · 🛵 Food delivery #177
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 32.7%; Cancelled orders 0; Avg delivery time 25.1min.
+- **Resilience** 78 → 84.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (7 past runs)).
+
+### INC-UPI-0735 · Round 735 · 💳 UPI payments #160
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0736 · Round 736 · 🚑 Emergency response (108) #394
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 11 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 14.4min; Patients sent to full hospitals 1; Critical patients waiting >15 min 3.
+- **Resilience** 91 → 88.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0737 · Round 737 · 🛵 Food delivery #178
+- **Experiment** (explore): Free-delivery zone config drift on Delivery zones.
+- **Detected** coverage_mismatch after 7 min.
+- **Diagnosis**: Free-delivery zone misconfigured (config drift) (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: restore_zone_config · MTTR 2 min · RECOVERED.
+- **Impact**: Late orders 5.0%; Cancelled orders 1; Avg delivery time 17.5min.
+- **Resilience** 84 → 87.
+- **Next**: Restaurant tablets offline (least-tested failure mode in food delivery (7 past runs)).
+
+### INC-UPI-0738 · Round 738 · 💳 UPI payments #161
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0739 · Round 739 · 🚑 Emergency response (108) #395
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 8 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 9 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 13.7min; Patients sent to full hospitals 2; Critical patients waiting >15 min 7.
+- **Resilience** 88 → 85.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0740 · Round 740 · 🛵 Food delivery #179
+- **Experiment** (explore): Free-delivery zone config drift on Delivery zones.
+- **Detected** coverage_mismatch after 7 min.
+- **Diagnosis**: Free-delivery zone misconfigured (config drift) (AEGIS confidence 97%, ORACLE-validated accuracy 100%).
+- **Recovery**: restore_zone_config · MTTR 2 min · RECOVERED.
+- **Impact**: Late orders 2.3%; Cancelled orders 0; Avg delivery time 19.5min.
+- **Resilience** 87 → 89.
+- **Next**: Restaurant tablets offline (least-tested failure mode in food delivery (7 past runs)).
+
+### INC-UPI-0741 · Round 741 · 💳 UPI payments #162
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0742 · Round 742 · 🚑 Emergency response (108) #396
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 12 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 13.6min; Patients sent to full hospitals 2; Critical patients waiting >15 min 4.
+- **Resilience** 85 → 84.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0743 · Round 743 · 🛵 Food delivery #180
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 22 min · RECOVERED.
+- **Impact**: Late orders 41.7%; Cancelled orders 0; Avg delivery time 28.5min.
+- **Resilience** 89 → 85.
+- **Next**: Restaurant tablets offline (least-tested failure mode in food delivery (7 past runs)).
+
+### INC-UPI-0744 · Round 744 · 💳 UPI payments #163
+- **Experiment** (explore): 10x Diwali traffic spike on Bank switch, Payment API.
+- **Detected** high_failure_rate+traffic_spike after 10 s.
+- **Diagnosis**: Traffic beyond bank capacity (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: queue_rate_limit · MTTR 5 s · RECOVERED.
+- **Impact**: Failed payments 1.8%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 91.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0745 · Round 745 · 🚑 Emergency response (108) #397
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 9 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 26 min · NOT RECOVERED.
+- **Impact**: Avg ambulance arrival 22.5min; Patients sent to full hospitals 0; Critical patients waiting >15 min 5.
+- **Resilience** 84 → 77.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0746 · Round 746 · 🛵 Food delivery #181
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 26 min · RECOVERED.
+- **Impact**: Late orders 60.0%; Cancelled orders 0; Avg delivery time 25.5min.
+- **Resilience** 85 → 82.
+- **Next**: Restaurant tablets offline (least-tested failure mode in food delivery (7 past runs)).
+
+### INC-UPI-0747 · Round 747 · 💳 UPI payments #164
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 91 → 92.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0748 · Round 748 · 🚑 Emergency response (108) #398
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 9 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 12.5min; Patients sent to full hospitals 2; Critical patients waiting >15 min 4.
+- **Resilience** 77 → 80.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0749 · Round 749 · 🛵 Food delivery #182
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 11 min · RECOVERED.
+- **Impact**: Late orders 49.1%; Cancelled orders 0; Avg delivery time 24.8min.
+- **Resilience** 82 → 85.
+- **Next**: Restaurant tablets offline (least-tested failure mode in food delivery (7 past runs)).
+
+### INC-UPI-0750 · Round 750 · 💳 UPI payments #165
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 4 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 92 → 93.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0751 · Round 751 · 🚑 Emergency response (108) #399
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 11.8min; Patients sent to full hospitals 5; Critical patients waiting >15 min 5.
+- **Resilience** 80 → 85.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0752 · Round 752 · 🛵 Food delivery #183
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 26.5%; Cancelled orders 0; Avg delivery time 21.9min.
+- **Resilience** 85 → 88.
+- **Next**: Restaurant tablets offline (least-tested failure mode in food delivery (7 past runs)).
+
+### INC-UPI-0753 · Round 753 · 💳 UPI payments #166
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 93 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0754 · Round 754 · 🚑 Emergency response (108) #400
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 8 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 98%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 16.5min; Patients sent to full hospitals 1; Critical patients waiting >15 min 4.
+- **Resilience** 85 → 86.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0755 · Round 755 · 🛵 Food delivery #184
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 29.2%; Cancelled orders 0; Avg delivery time 24.1min.
+- **Resilience** 88 → 90.
+- **Next**: Restaurant tablets offline (least-tested failure mode in food delivery (7 past runs)).
+
+### INC-UPI-0756 · Round 756 · 💳 UPI payments #167
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0757 · Round 757 · 🚑 Emergency response (108) #401
+- **Experiment** (explore): SMS gateway outage on Notifier (SMS).
+- **Detected** sms_failing after 3 min.
+- **Diagnosis**: SMS gateway outage (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: backup_sms · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.7min; Patients sent to full hospitals 4; Critical patients waiting >15 min 1.
+- **Resilience** 86 → 89.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0758 · Round 758 · 🛵 Food delivery #185
+- **Experiment** (explore): Restaurant tablets offline on Restaurant tablets.
+- **Detected** orders_unacknowledged after 5 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 92%, ORACLE-validated accuracy 67%).
+- **Recovery**: phone_restaurants + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 24.1%; Cancelled orders 0; Avg delivery time 22.8min.
+- **Resilience** 90 → 89.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0759 · Round 759 · 💳 UPI payments #168
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0760 · Round 760 · 🚑 Emergency response (108) #402
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 7 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 10.7min; Patients sent to full hospitals 1; Critical patients waiting >15 min 1.
+- **Resilience** 89 → 89.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0761 · Round 761 · 🛵 Food delivery #186
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 52.7%; Cancelled orders 0; Avg delivery time 23.8min.
+- **Resilience** 89 → 91.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0762 · Round 762 · 💳 UPI payments #169
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0763 · Round 763 · 🚑 Emergency response (108) #403
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 4 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 6 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 18.2min; Patients sent to full hospitals 2; Critical patients waiting >15 min 8.
+- **Resilience** 89 → 89.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0764 · Round 764 · 🛵 Food delivery #187
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 31.9%; Cancelled orders 1; Avg delivery time 23.6min.
+- **Resilience** 91 → 92.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0765 · Round 765 · 💳 UPI payments #170
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0766 · Round 766 · 🚑 Emergency response (108) #404
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 10 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 12.7min; Patients sent to full hospitals 1; Critical patients waiting >15 min 2.
+- **Resilience** 89 → 87.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0767 · Round 767 · 🛵 Food delivery #188
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 22.7%; Cancelled orders 1; Avg delivery time 22.1min.
+- **Resilience** 92 → 93.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0768 · Round 768 · 💳 UPI payments #171
+- **Experiment** (explore): Partner-bank latency injection on Bank switch.
+- **Detected** high_failure_rate+one_bank after 8 s.
+- **Diagnosis**: Slow partner bank (injected latency) (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: route_to_healthy_bank · MTTR 9 s · RECOVERED.
+- **Impact**: Failed payments 3.0%; Double debits 0; Money stuck (debited, not confirmed) 11540.
+- **Resilience** 94 → 90.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (6 past runs)).
+
+### INC-EME-0769 · Round 769 · 🚑 Emergency response (108) #405
+- **Experiment** (explore): Dispatcher latency injection on Dispatcher.
+- **Detected** dispatch_backlog after 20 min.
+- **Diagnosis**: Degraded dispatcher (injected latency) (AEGIS confidence 80%, ORACLE-validated accuracy 100%).
+- **Recovery**: restart_dispatch · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 10.6min; Patients sent to full hospitals 1; Critical patients waiting >15 min 0.
+- **Resilience** 87 → 85.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (13 past runs)).
+
+### INC-FOO-0770 · Round 770 · 🛵 Food delivery #189
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 39.5%; Cancelled orders 0; Avg delivery time 26.7min.
+- **Resilience** 93 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0771 · Round 771 · 💳 UPI payments #172
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 90 → 92.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (7 past runs)).
+
+### INC-EME-0772 · Round 772 · 🚑 Emergency response (108) #406
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 4 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 11.7min; Patients sent to full hospitals 1; Critical patients waiting >15 min 3.
+- **Resilience** 85 → 87.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0773 · Round 773 · 🛵 Food delivery #190
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 26.1%; Cancelled orders 0; Avg delivery time 24.9min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0774 · Round 774 · 💳 UPI payments #173
+- **Experiment** (explore): 10x Diwali traffic spike on Bank switch, Payment API.
+- **Detected** high_failure_rate+traffic_spike after 12 s.
+- **Diagnosis**: Traffic beyond bank capacity (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: queue_rate_limit · MTTR 5 s · RECOVERED.
+- **Impact**: Failed payments 1.6%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 92 → 89.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (7 past runs)).
+
+### INC-EME-0775 · Round 775 · 🚑 Emergency response (108) #407
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 9 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 92%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 20 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 20.6min; Patients sent to full hospitals 0; Critical patients waiting >15 min 8.
+- **Resilience** 87 → 79.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0776 · Round 776 · 🛵 Food delivery #191
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 52.6%; Cancelled orders 0; Avg delivery time 25.0min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0777 · Round 777 · 💳 UPI payments #174
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 89 → 91.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (7 past runs)).
+
+### INC-EME-0778 · Round 778 · 🚑 Emergency response (108) #408
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 4 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 12.7min; Patients sent to full hospitals 1; Critical patients waiting >15 min 2.
+- **Resilience** 79 → 84.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0779 · Round 779 · 🛵 Food delivery #192
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 99%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 45.1%; Cancelled orders 0; Avg delivery time 25.2min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0780 · Round 780 · 💳 UPI payments #175
+- **Experiment** (explore): Partner-bank latency injection on Bank switch.
+- **Detected** high_failure_rate+one_bank after 8 s.
+- **Diagnosis**: Slow partner bank (injected latency) (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: route_to_healthy_bank · MTTR 9 s · RECOVERED.
+- **Impact**: Failed payments 3.5%; Double debits 0; Money stuck (debited, not confirmed) 6375.
+- **Resilience** 91 → 89.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (7 past runs)).
+
+### INC-EME-0781 · Round 781 · 🚑 Emergency response (108) #409
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 7 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 88%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 19 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 14.8min; Patients sent to full hospitals 5; Critical patients waiting >15 min 2.
+- **Resilience** 84 → 78.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0782 · Round 782 · 🛵 Food delivery #193
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 96%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 38.3%; Cancelled orders 0; Avg delivery time 23.6min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0783 · Round 783 · 💳 UPI payments #176
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 4 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 91%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 89 → 91.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0784 · Round 784 · 🚑 Emergency response (108) #410
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.4min; Patients sent to full hospitals 2; Critical patients waiting >15 min 0.
+- **Resilience** 78 → 84.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0785 · Round 785 · 🛵 Food delivery #194
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 26.7%; Cancelled orders 0; Avg delivery time 24.9min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0786 · Round 786 · 💳 UPI payments #177
+- **Experiment** (explore): Duplicate-request storm on Ledger.
+- **Detected** double_debits after 3 s.
+- **Diagnosis**: Duplicate requests reaching the ledger (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: idempotency_check · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 12; Money stuck (debited, not confirmed) 6080.
+- **Resilience** 91 → 92.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0787 · Round 787 · 🚑 Emergency response (108) #411
+- **Experiment** (explore): Stale bed data on Bed tracker.
+- **Detected** bed_feed_stale after 4 min.
+- **Diagnosis**: Stale bed-availability feed (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: skip_stale_hospitals · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 8.9min; Patients sent to full hospitals 4; Critical patients waiting >15 min 0.
+- **Resilience** 84 → 87.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0788 · Round 788 · 🛵 Food delivery #195
+- **Experiment** (explore): Restaurant tablets offline on Restaurant tablets.
+- **Detected** orders_unacknowledged after 10 min.
+- **Diagnosis**: Restaurant tablets offline (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: phone_restaurants · MTTR 2 min · RECOVERED.
+- **Impact**: Late orders 2.5%; Cancelled orders 0; Avg delivery time 18.6min.
+- **Resilience** 94 → 93.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0789 · Round 789 · 💳 UPI payments #178
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 92 → 93.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0790 · Round 790 · 🚑 Emergency response (108) #412
+- **Experiment** (explore): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 9 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 98%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 14.1min; Patients sent to full hospitals 1; Critical patients waiting >15 min 5.
+- **Resilience** 87 → 87.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0791 · Round 791 · 🛵 Food delivery #196
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 34.0%; Cancelled orders 0; Avg delivery time 23.8min.
+- **Resilience** 93 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0792 · Round 792 · 💳 UPI payments #179
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 93 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0793 · Round 793 · 🚑 Emergency response (108) #413
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 3 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 10 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 14.5min; Patients sent to full hospitals 1; Critical patients waiting >15 min 7.
+- **Resilience** 87 → 86.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0794 · Round 794 · 🛵 Food delivery #197
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 97%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 18.2%; Cancelled orders 0; Avg delivery time 24.8min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0795 · Round 795 · 💳 UPI payments #180
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0796 · Round 796 · 🚑 Emergency response (108) #414
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 14.1min; Patients sent to full hospitals 8; Critical patients waiting >15 min 5.
+- **Resilience** 86 → 89.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0797 · Round 797 · 🛵 Food delivery #198
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 31.8%; Cancelled orders 0; Avg delivery time 24.7min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0798 · Round 798 · 💳 UPI payments #181
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0799 · Round 799 · 🚑 Emergency response (108) #415
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 8.2min; Patients sent to full hospitals 1; Critical patients waiting >15 min 0.
+- **Resilience** 89 → 91.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0800 · Round 800 · 🛵 Food delivery #199
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 31.9%; Cancelled orders 0; Avg delivery time 25.9min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0801 · Round 801 · 💳 UPI payments #182
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0802 · Round 802 · 🚑 Emergency response (108) #416
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 8 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 13.7min; Patients sent to full hospitals 1; Critical patients waiting >15 min 2.
+- **Resilience** 91 → 90.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0803 · Round 803 · 🛵 Food delivery #200
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 40.4%; Cancelled orders 0; Avg delivery time 23.2min.
+- **Resilience** 94 → 94.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0804 · Round 804 · 💳 UPI payments #183
+- **Experiment** (explore): Duplicate-request storm on Ledger.
+- **Detected** double_debits after 3 s.
+- **Diagnosis**: Duplicate requests reaching the ledger (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: idempotency_check · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 13; Money stuck (debited, not confirmed) 4505.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0805 · Round 805 · 🚑 Emergency response (108) #417
+- **Experiment** (explore): GPS dead zone on GPS tracker.
+- **Detected** gps_stuck after 5 min.
+- **Diagnosis**: Frozen GPS telemetry (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: distrust_gps · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 8.8min; Patients sent to full hospitals 1; Critical patients waiting >15 min 0.
+- **Resilience** 90 → 90.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0806 · Round 806 · 🛵 Food delivery #201
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 10 min · RECOVERED.
+- **Impact**: Late orders 59.6%; Cancelled orders 0; Avg delivery time 25.8min.
+- **Resilience** 94 → 92.
+- **Next**: Festival order surge (least-tested failure mode in food delivery (8 past runs)).
+
+### INC-UPI-0807 · Round 807 · 💳 UPI payments #184
+- **Experiment** (explore): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0808 · Round 808 · 🚑 Emergency response (108) #418
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 3 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 10.9min; Patients sent to full hospitals 3; Critical patients waiting >15 min 1.
+- **Resilience** 90 → 91.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0809 · Round 809 · 🛵 Food delivery #202
+- **Experiment** (explore): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 13 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 94%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 6 min · RECOVERED.
+- **Impact**: Late orders 23.3%; Cancelled orders 1; Avg delivery time 23.2min.
+- **Resilience** 92 → 88.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0810 · Round 810 · 💳 UPI payments #185
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0811 · Round 811 · 🚑 Emergency response (108) #419
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 9 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 5 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 16.7min; Patients sent to full hospitals 0; Critical patients waiting >15 min 4.
+- **Resilience** 91 → 86.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0812 · Round 812 · 🛵 Food delivery #203
+- **Experiment** (explore): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 96%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 11 min · RECOVERED.
+- **Impact**: Late orders 47.5%; Cancelled orders 1; Avg delivery time 24.8min.
+- **Resilience** 88 → 89.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0813 · Round 813 · 💳 UPI payments #186
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0814 · Round 814 · 🚑 Emergency response (108) #420
+- **Experiment** (explore): GPS dead zone on GPS tracker.
+- **Detected** gps_stuck after 5 min.
+- **Diagnosis**: Frozen GPS telemetry (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: distrust_gps · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 10.7min; Patients sent to full hospitals 3; Critical patients waiting >15 min 3.
+- **Resilience** 86 → 88.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0815 · Round 815 · 🛵 Food delivery #204
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 48.1%; Cancelled orders 1; Avg delivery time 24.2min.
+- **Resilience** 89 → 91.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0816 · Round 816 · 💳 UPI payments #187
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0817 · Round 817 · 🚑 Emergency response (108) #421
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 3 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.7min; Patients sent to full hospitals 4; Critical patients waiting >15 min 2.
+- **Resilience** 88 → 90.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0818 · Round 818 · 🛵 Food delivery #205
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 30.6%; Cancelled orders 0; Avg delivery time 22.9min.
+- **Resilience** 91 → 92.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0819 · Round 819 · 💳 UPI payments #188
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0820 · Round 820 · 🚑 Emergency response (108) #422
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 10 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 6 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 12.9min; Patients sent to full hospitals 4; Critical patients waiting >15 min 1.
+- **Resilience** 90 → 86.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0821 · Round 821 · 🛵 Food delivery #206
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 45.7%; Cancelled orders 0; Avg delivery time 25.2min.
+- **Resilience** 92 → 93.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0822 · Round 822 · 💳 UPI payments #189
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0823 · Round 823 · 🚑 Emergency response (108) #423
+- **Experiment** (explore): SMS gateway outage on Notifier (SMS).
+- **Detected** sms_failing after 2 min.
+- **Diagnosis**: SMS gateway outage (AEGIS confidence 83%, ORACLE-validated accuracy 100%).
+- **Recovery**: backup_sms · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 8.7min; Patients sent to full hospitals 2; Critical patients waiting >15 min 0.
+- **Resilience** 86 → 89.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0824 · Round 824 · 🛵 Food delivery #207
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 20.4%; Cancelled orders 0; Avg delivery time 24.9min.
+- **Resilience** 93 → 94.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0825 · Round 825 · 💳 UPI payments #190
+- **Experiment** (explore): Partner-bank latency injection on Bank switch.
+- **Detected** high_failure_rate+one_bank after 9 s.
+- **Diagnosis**: Slow partner bank (injected latency) (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: route_to_healthy_bank · MTTR 10 s · RECOVERED.
+- **Impact**: Failed payments 3.8%; Double debits 0; Money stuck (debited, not confirmed) 7687.
+- **Resilience** 94 → 90.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (8 past runs)).
+
+### INC-EME-0826 · Round 826 · 🚑 Emergency response (108) #424
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 7 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 11.7min; Patients sent to full hospitals 1; Critical patients waiting >15 min 5.
+- **Resilience** 89 → 89.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0827 · Round 827 · 🛵 Food delivery #208
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 42.0%; Cancelled orders 0; Avg delivery time 26.0min.
+- **Resilience** 94 → 94.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0828 · Round 828 · 💳 UPI payments #191
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 90 → 92.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0829 · Round 829 · 🚑 Emergency response (108) #425
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 8.8min; Patients sent to full hospitals 0; Critical patients waiting >15 min 0.
+- **Resilience** 89 → 91.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0830 · Round 830 · 🛵 Food delivery #209
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + restore_zone_config + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 37.2%; Cancelled orders 0; Avg delivery time 26.1min.
+- **Resilience** 94 → 93.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0831 · Round 831 · 💳 UPI payments #192
+- **Experiment** (explore): 10x Diwali traffic spike on Bank switch, Payment API.
+- **Detected** high_failure_rate+traffic_spike after 11 s.
+- **Diagnosis**: Traffic beyond bank capacity (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: queue_rate_limit · MTTR 5 s · RECOVERED.
+- **Impact**: Failed payments 1.5%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 92 → 90.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0832 · Round 832 · 🚑 Emergency response (108) #426
+- **Experiment** (explore): GPS dead zone on GPS tracker.
+- **Detected** gps_stuck after 3 min.
+- **Diagnosis**: Frozen GPS telemetry (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: distrust_gps · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 8.0min; Patients sent to full hospitals 2; Critical patients waiting >15 min 0.
+- **Resilience** 91 → 92.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0833 · Round 833 · 🛵 Food delivery #210
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 34.8%; Cancelled orders 0; Avg delivery time 25.1min.
+- **Resilience** 93 → 94.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0834 · Round 834 · 💳 UPI payments #193
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 90 → 92.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0835 · Round 835 · 🚑 Emergency response (108) #427
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 10 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 10.5min; Patients sent to full hospitals 7; Critical patients waiting >15 min 1.
+- **Resilience** 92 → 89.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0836 · Round 836 · 🛵 Food delivery #211
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 40.0%; Cancelled orders 0; Avg delivery time 25.3min.
+- **Resilience** 94 → 94.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0837 · Round 837 · 💳 UPI payments #194
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 92 → 93.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0838 · Round 838 · 🚑 Emergency response (108) #428
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 15 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 15.1min; Patients sent to full hospitals 0; Critical patients waiting >15 min 2.
+- **Resilience** 89 → 86.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0839 · Round 839 · 🛵 Food delivery #212
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 6 min · RECOVERED.
+- **Impact**: Late orders 40.4%; Cancelled orders 0; Avg delivery time 24.4min.
+- **Resilience** 94 → 93.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0840 · Round 840 · 💳 UPI payments #195
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 93 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0841 · Round 841 · 🚑 Emergency response (108) #429
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 4 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 12.3min; Patients sent to full hospitals 3; Critical patients waiting >15 min 1.
+- **Resilience** 86 → 88.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0842 · Round 842 · 🛵 Food delivery #213
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 10 min · RECOVERED.
+- **Impact**: Late orders 54.4%; Cancelled orders 0; Avg delivery time 25.4min.
+- **Resilience** 93 → 91.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0843 · Round 843 · 💳 UPI payments #196
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0844 · Round 844 · 🚑 Emergency response (108) #430
+- **Experiment** (explore): GPS dead zone on GPS tracker.
+- **Detected** gps_stuck after 5 min.
+- **Diagnosis**: Frozen GPS telemetry (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: distrust_gps · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 12.1min; Patients sent to full hospitals 0; Critical patients waiting >15 min 3.
+- **Resilience** 88 → 89.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0845 · Round 845 · 🛵 Food delivery #214
+- **Experiment** (explore): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 21.7%; Cancelled orders 0; Avg delivery time 21.8min.
+- **Resilience** 91 → 92.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0846 · Round 846 · 💳 UPI payments #197
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0847 · Round 847 · 🚑 Emergency response (108) #431
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 10 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 98%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 24 min · NOT RECOVERED.
+- **Impact**: Avg ambulance arrival 18.3min; Patients sent to full hospitals 1; Critical patients waiting >15 min 7.
+- **Resilience** 89 → 80.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0848 · Round 848 · 🛵 Food delivery #215
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 42 min · RECOVERED.
+- **Impact**: Late orders 66.7%; Cancelled orders 0; Avg delivery time 28.8min.
+- **Resilience** 92 → 87.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0849 · Round 849 · 💳 UPI payments #198
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0850 · Round 850 · 🚑 Emergency response (108) #432
+- **Experiment** (explore): Stale bed data on Bed tracker.
+- **Detected** bed_feed_stale after 4 min.
+- **Diagnosis**: Stale bed-availability feed (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: skip_stale_hospitals · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 8.7min; Patients sent to full hospitals 0; Critical patients waiting >15 min 0.
+- **Resilience** 80 → 84.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0851 · Round 851 · 🛵 Food delivery #216
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 42.6%; Cancelled orders 2; Avg delivery time 26.3min.
+- **Resilience** 87 → 90.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0852 · Round 852 · 💳 UPI payments #199
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0853 · Round 853 · 🚑 Emergency response (108) #433
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 10 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 13.6min; Patients sent to full hospitals 0; Critical patients waiting >15 min 0.
+- **Resilience** 84 → 84.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0854 · Round 854 · 🛵 Food delivery #217
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 28.9%; Cancelled orders 0; Avg delivery time 25.2min.
+- **Resilience** 90 → 92.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0855 · Round 855 · 💳 UPI payments #200
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0856 · Round 856 · 🚑 Emergency response (108) #434
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 11 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 17.4min; Patients sent to full hospitals 0; Critical patients waiting >15 min 3.
+- **Resilience** 84 → 84.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0857 · Round 857 · 🛵 Food delivery #218
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 22 min · RECOVERED.
+- **Impact**: Late orders 44.6%; Cancelled orders 0; Avg delivery time 28.1min.
+- **Resilience** 92 → 87.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0858 · Round 858 · 💳 UPI payments #201
+- **Experiment** (explore): 10x Diwali traffic spike on Bank switch, Payment API.
+- **Detected** high_failure_rate+traffic_spike after 13 s.
+- **Diagnosis**: Traffic beyond bank capacity (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: queue_rate_limit · MTTR 5 s · RECOVERED.
+- **Impact**: Failed payments 1.8%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 90.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0859 · Round 859 · 🚑 Emergency response (108) #435
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 8 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 16 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 19.0min; Patients sent to full hospitals 0; Critical patients waiting >15 min 6.
+- **Resilience** 84 → 77.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0860 · Round 860 · 🛵 Food delivery #219
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 96%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 21.1%; Cancelled orders 0; Avg delivery time 21.9min.
+- **Resilience** 87 → 90.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0861 · Round 861 · 💳 UPI payments #202
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 4 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 90 → 91.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0862 · Round 862 · 🚑 Emergency response (108) #436
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 11 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 14 min · NOT RECOVERED.
+- **Impact**: Avg ambulance arrival 16.0min; Patients sent to full hospitals 1; Critical patients waiting >15 min 6.
+- **Resilience** 77 → 71.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0863 · Round 863 · 🛵 Food delivery #220
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 44.2%; Cancelled orders 1; Avg delivery time 24.1min.
+- **Resilience** 90 → 92.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0864 · Round 864 · 💳 UPI payments #203
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 91%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 91 → 92.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0865 · Round 865 · 🚑 Emergency response (108) #437
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 4 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 13.4min; Patients sent to full hospitals 4; Critical patients waiting >15 min 5.
+- **Resilience** 71 → 78.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0866 · Round 866 · 🛵 Food delivery #221
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 30 min · RECOVERED.
+- **Impact**: Late orders 60.3%; Cancelled orders 0; Avg delivery time 29.7min.
+- **Resilience** 92 → 87.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0867 · Round 867 · 💳 UPI payments #204
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 92 → 93.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0868 · Round 868 · 🚑 Emergency response (108) #438
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 3 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 13.1min; Patients sent to full hospitals 2; Critical patients waiting >15 min 5.
+- **Resilience** 78 → 84.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0869 · Round 869 · 🛵 Food delivery #222
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 28.0%; Cancelled orders 1; Avg delivery time 22.4min.
+- **Resilience** 87 → 90.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0870 · Round 870 · 💳 UPI payments #205
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 4 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 93 → 93.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0871 · Round 871 · 🚑 Emergency response (108) #439
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 8 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 19 min · NOT RECOVERED.
+- **Impact**: Avg ambulance arrival 17.6min; Patients sent to full hospitals 0; Critical patients waiting >15 min 4.
+- **Resilience** 84 → 77.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0872 · Round 872 · 🛵 Food delivery #223
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 13.6%; Cancelled orders 0; Avg delivery time 23.9min.
+- **Resilience** 90 → 92.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0873 · Round 873 · 💳 UPI payments #206
+- **Experiment** (explore): 10x Diwali traffic spike on Bank switch, Payment API.
+- **Detected** high_failure_rate+traffic_spike after 13 s.
+- **Diagnosis**: Traffic beyond bank capacity (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: queue_rate_limit · MTTR 5 s · RECOVERED.
+- **Impact**: Failed payments 1.8%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 93 → 90.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0874 · Round 874 · 🚑 Emergency response (108) #440
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 6 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 11 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 12.3min; Patients sent to full hospitals 5; Critical patients waiting >15 min 2.
+- **Resilience** 77 → 78.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0875 · Round 875 · 🛵 Food delivery #224
+- **Experiment** (explore): Restaurant tablets offline on Restaurant tablets.
+- **Detected** orders_unacknowledged after 7 min.
+- **Diagnosis**: Restaurant tablets offline (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: phone_restaurants · MTTR 2 min · RECOVERED.
+- **Impact**: Late orders 2.0%; Cancelled orders 0; Avg delivery time 19.5min.
+- **Resilience** 92 → 92.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0876 · Round 876 · 💳 UPI payments #207
+- **Experiment** (explore): Partner-bank latency injection on Bank switch.
+- **Detected** high_failure_rate+one_bank after 8 s.
+- **Diagnosis**: Slow partner bank (injected latency) (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: route_to_healthy_bank · MTTR 10 s · RECOVERED.
+- **Impact**: Failed payments 2.7%; Double debits 0; Money stuck (debited, not confirmed) 4905.
+- **Resilience** 90 → 88.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (9 past runs)).
+
+### INC-EME-0877 · Round 877 · 🚑 Emergency response (108) #441
+- **Experiment** (explore): Dispatcher latency injection on Dispatcher.
+- **Detected** dispatch_backlog after 9 min.
+- **Diagnosis**: Degraded dispatcher (injected latency) (AEGIS confidence 78%, ORACLE-validated accuracy 100%).
+- **Recovery**: restart_dispatch · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 8.2min; Patients sent to full hospitals 0; Critical patients waiting >15 min 0.
+- **Resilience** 78 → 81.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (14 past runs)).
+
+### INC-FOO-0878 · Round 878 · 🛵 Food delivery #225
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 43.2%; Cancelled orders 2; Avg delivery time 25.4min.
+- **Resilience** 92 → 93.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0879 · Round 879 · 💳 UPI payments #208
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 88 → 90.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0880 · Round 880 · 🚑 Emergency response (108) #442
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 10.3min; Patients sent to full hospitals 0; Critical patients waiting >15 min 0.
+- **Resilience** 81 → 86.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0881 · Round 881 · 🛵 Food delivery #226
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 40.7%; Cancelled orders 0; Avg delivery time 21.6min.
+- **Resilience** 93 → 94.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0882 · Round 882 · 💳 UPI payments #209
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 91%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 90 → 92.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0883 · Round 883 · 🚑 Emergency response (108) #443
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 4 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 10.3min; Patients sent to full hospitals 2; Critical patients waiting >15 min 2.
+- **Resilience** 86 → 88.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0884 · Round 884 · 🛵 Food delivery #227
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 27.9%; Cancelled orders 0; Avg delivery time 25.9min.
+- **Resilience** 94 → 94.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0885 · Round 885 · 💳 UPI payments #210
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 92 → 93.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0886 · Round 886 · 🚑 Emergency response (108) #444
+- **Experiment** (explore): GPS dead zone on GPS tracker.
+- **Detected** gps_stuck after 6 min.
+- **Diagnosis**: Frozen GPS telemetry (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: distrust_gps · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 7.0min; Patients sent to full hospitals 0; Critical patients waiting >15 min 0.
+- **Resilience** 88 → 89.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0887 · Round 887 · 🛵 Food delivery #228
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + restore_zone_config + extend_eta_notify · MTTR 6 min · RECOVERED.
+- **Impact**: Late orders 32.1%; Cancelled orders 0; Avg delivery time 25.8min.
+- **Resilience** 94 → 93.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0888 · Round 888 · 💳 UPI payments #211
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 93 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0889 · Round 889 · 🚑 Emergency response (108) #445
+- **Experiment** (explore): SMS gateway outage on Notifier (SMS).
+- **Detected** sms_failing after 2 min.
+- **Diagnosis**: SMS gateway outage (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: backup_sms · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 9.0min; Patients sent to full hospitals 3; Critical patients waiting >15 min 1.
+- **Resilience** 89 → 91.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0890 · Round 890 · 🛵 Food delivery #229
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 24.4%; Cancelled orders 2; Avg delivery time 23.6min.
+- **Resilience** 93 → 94.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0891 · Round 891 · 💳 UPI payments #212
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0892 · Round 892 · 🚑 Emergency response (108) #446
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 7 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 15.1min; Patients sent to full hospitals 2; Critical patients waiting >15 min 6.
+- **Resilience** 91 → 90.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0893 · Round 893 · 🛵 Food delivery #230
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 15.8%; Cancelled orders 0; Avg delivery time 20.7min.
+- **Resilience** 94 → 94.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0894 · Round 894 · 💳 UPI payments #213
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0895 · Round 895 · 🚑 Emergency response (108) #447
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 9 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 95%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 30 min · NOT RECOVERED.
+- **Impact**: Avg ambulance arrival 18.0min; Patients sent to full hospitals 5; Critical patients waiting >15 min 10.
+- **Resilience** 90 → 81.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0896 · Round 896 · 🛵 Food delivery #231
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 19 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 91%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 19 min · RECOVERED.
+- **Impact**: Late orders 28.7%; Cancelled orders 0; Avg delivery time 24.2min.
+- **Resilience** 94 → 84.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0897 · Round 897 · 💳 UPI payments #214
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0898 · Round 898 · 🚑 Emergency response (108) #448
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 9 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 4 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 15.8min; Patients sent to full hospitals 0; Critical patients waiting >15 min 3.
+- **Resilience** 81 → 82.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0899 · Round 899 · 🛵 Food delivery #232
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 14 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 92%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 16 min · RECOVERED.
+- **Impact**: Late orders 35.8%; Cancelled orders 3; Avg delivery time 23.8min.
+- **Resilience** 84 → 80.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0900 · Round 900 · 💳 UPI payments #215
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0901 · Round 901 · 🚑 Emergency response (108) #449
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 9 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 100%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 31 min · NOT RECOVERED.
+- **Impact**: Avg ambulance arrival 20.3min; Patients sent to full hospitals 1; Critical patients waiting >15 min 5.
+- **Resilience** 82 → 76.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0902 · Round 902 · 🛵 Food delivery #233
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 15 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 94%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 9 min · RECOVERED.
+- **Impact**: Late orders 28.4%; Cancelled orders 2; Avg delivery time 24.4min.
+- **Resilience** 80 → 79.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0903 · Round 903 · 💳 UPI payments #216
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 87%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0904 · Round 904 · 🚑 Emergency response (108) #450
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 3 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 15.8min; Patients sent to full hospitals 4; Critical patients waiting >15 min 5.
+- **Resilience** 76 → 82.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0905 · Round 905 · 🛵 Food delivery #234
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 15 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 98%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 8 min · RECOVERED.
+- **Impact**: Late orders 27.8%; Cancelled orders 1; Avg delivery time 24.1min.
+- **Resilience** 79 → 78.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0906 · Round 906 · 💳 UPI payments #217
+- **Experiment** (explore): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0907 · Round 907 · 🚑 Emergency response (108) #451
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 6.9min; Patients sent to full hospitals 0; Critical patients waiting >15 min 0.
+- **Resilience** 82 → 87.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0908 · Round 908 · 🛵 Food delivery #235
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 26 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 94%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 27.2%; Cancelled orders 1; Avg delivery time 22.7min.
+- **Resilience** 78 → 77.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0909 · Round 909 · 💳 UPI payments #218
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0910 · Round 910 · 🚑 Emergency response (108) #452
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 2 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 11.1min; Patients sent to full hospitals 4; Critical patients waiting >15 min 2.
+- **Resilience** 87 → 90.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0911 · Round 911 · 🛵 Food delivery #236
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 14 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 90%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 8 min · RECOVERED.
+- **Impact**: Late orders 24.4%; Cancelled orders 3; Avg delivery time 24.2min.
+- **Resilience** 77 → 77.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0912 · Round 912 · 💳 UPI payments #219
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0913 · Round 913 · 🚑 Emergency response (108) #453
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 4 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 16.2min; Patients sent to full hospitals 3; Critical patients waiting >15 min 6.
+- **Resilience** 90 → 91.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0914 · Round 914 · 🛵 Food delivery #237
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 16 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 100%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 12 min · RECOVERED.
+- **Impact**: Late orders 22.9%; Cancelled orders 0; Avg delivery time 22.8min.
+- **Resilience** 77 → 76.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0915 · Round 915 · 💳 UPI payments #220
+- **Experiment** (explore): 10x Diwali traffic spike on Bank switch, Payment API.
+- **Detected** high_failure_rate+traffic_spike after 17 s.
+- **Diagnosis**: Traffic beyond bank capacity (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: queue_rate_limit · MTTR 5 s · RECOVERED.
+- **Impact**: Failed payments 1.7%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 89.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0916 · Round 916 · 🚑 Emergency response (108) #454
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 11 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 88%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 18 min · NOT RECOVERED.
+- **Impact**: Avg ambulance arrival 15.9min; Patients sent to full hospitals 0; Critical patients waiting >15 min 4.
+- **Resilience** 91 → 80.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0917 · Round 917 · 🛵 Food delivery #238
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 16 min.
+- **Diagnosis**: Promised ETAs no longer realistic (AEGIS confidence 92%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 10 min · RECOVERED.
+- **Impact**: Late orders 25.5%; Cancelled orders 1; Avg delivery time 22.1min.
+- **Resilience** 76 → 76.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0918 · Round 918 · 💳 UPI payments #221
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 89 → 91.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0919 · Round 919 · 🚑 Emergency response (108) #455
+- **Experiment** (explore): SMS gateway outage on Notifier (SMS).
+- **Detected** sms_failing after 2 min.
+- **Diagnosis**: SMS gateway outage (AEGIS confidence 92%, ORACLE-validated accuracy 100%).
+- **Recovery**: backup_sms · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 8.7min; Patients sent to full hospitals 3; Critical patients waiting >15 min 0.
+- **Resilience** 80 → 85.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0920 · Round 920 · 🛵 Food delivery #239
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 15 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 90%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 12 min · RECOVERED.
+- **Impact**: Late orders 25.5%; Cancelled orders 1; Avg delivery time 22.9min.
+- **Resilience** 76 → 76.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0921 · Round 921 · 💳 UPI payments #222
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 2 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 91 → 93.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0922 · Round 922 · 🚑 Emergency response (108) #456
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 8 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 17.6min; Patients sent to full hospitals 0; Critical patients waiting >15 min 3.
+- **Resilience** 85 → 86.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0923 · Round 923 · 🛵 Food delivery #240
+- **Experiment** (explore): Maps API latency injection on Maps / ETA.
+- **Detected** assignment_slow after 2 min.
+- **Diagnosis**: Slow maps / ETA dependency (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: cached_routes · MTTR 2 min · RECOVERED.
+- **Impact**: Late orders 0.0%; Cancelled orders 0; Avg delivery time 16.8min.
+- **Resilience** 76 → 83.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0924 · Round 924 · 💳 UPI payments #223
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 86%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 93 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0925 · Round 925 · 🚑 Emergency response (108) #457
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 6 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 15.2min; Patients sent to full hospitals 0; Critical patients waiting >15 min 4.
+- **Resilience** 86 → 87.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0926 · Round 926 · 🛵 Food delivery #241
+- **Experiment** (exploit): Festival order surge on Assignment, Order intake.
+- **Detected** order_backlog+high_order_rate after 19 min.
+- **Diagnosis**: Order surge beyond fleet capacity (AEGIS confidence 94%, ORACLE-validated accuracy 80%).
+- **Recovery**: reassign_riders + batch_orders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 16.2%; Cancelled orders 0; Avg delivery time 23.4min.
+- **Resilience** 83 → 81.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0927 · Round 927 · 💳 UPI payments #224
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 88%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0928 · Round 928 · 🚑 Emergency response (108) #458
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 12 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 98%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 24 min · NOT RECOVERED.
+- **Impact**: Avg ambulance arrival 16.9min; Patients sent to full hospitals 0; Critical patients waiting >15 min 6.
+- **Resilience** 87 → 78.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0929 · Round 929 · 🛵 Food delivery #242
+- **Experiment** (exploit): Heavy rain + rider shortage on Assignment, Rider GPS.
+- **Detected** rider_shortage after 2 min.
+- **Diagnosis**: Rider shortage (weather or demand) (AEGIS confidence 95%, ORACLE-validated accuracy 100%).
+- **Recovery**: reassign_riders + extend_eta_notify · MTTR 4 min · RECOVERED.
+- **Impact**: Late orders 41.7%; Cancelled orders 1; Avg delivery time 26.0min.
+- **Resilience** 81 → 86.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0930 · Round 930 · 💳 UPI payments #225
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 3 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 89%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 94.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0931 · Round 931 · 🚑 Emergency response (108) #459
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 8 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 98%, ORACLE-validated accuracy 67%).
+- **Recovery**: surge_mode + restart_dispatch · MTTR 19 min · NOT RECOVERED.
+- **Impact**: Avg ambulance arrival 16.4min; Patients sent to full hospitals 4; Critical patients waiting >15 min 6.
+- **Resilience** 78 → 73.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+
+### INC-FOO-0932 · Round 932 · 🛵 Food delivery #243
+- **Experiment** (explore): Maps API latency injection on Maps / ETA.
+- **Detected** assignment_slow after 2 min.
+- **Diagnosis**: Slow maps / ETA dependency (AEGIS confidence 100%, ORACLE-validated accuracy 100%).
+- **Recovery**: cached_routes · MTTR 2 min · RECOVERED.
+- **Impact**: Late orders 0.0%; Cancelled orders 0; Avg delivery time 18.0min.
+- **Resilience** 86 → 90.
+- **Next**: Free-delivery zone config drift (least-tested failure mode in food delivery (9 past runs)).
+
+### INC-UPI-0933 · Round 933 · 💳 UPI payments #226
+- **Experiment** (exploit): Fraud-bot burst on Fraud check, Payment API.
+- **Detected** fraud_check_backlog+few_devices after 2 s.
+- **Diagnosis**: Bot traffic flooding the fraud check (AEGIS confidence 85%, ORACLE-validated accuracy 100%).
+- **Recovery**: throttle_bot · MTTR 2 s · RECOVERED.
+- **Impact**: Failed payments 0.0%; Double debits 0; Money stuck (debited, not confirmed) 0.
+- **Resilience** 94 → 95.
+- **Next**: Partner-bank latency injection (least-tested failure mode in upi payments (10 past runs)).
+
+### INC-EME-0934 · Round 934 · 🚑 Emergency response (108) #460
+- **Experiment** (exploit): Mass-casualty call surge on Call intake, Dispatcher.
+- **Detected** dispatch_backlog+high_call_rate after 7 min.
+- **Diagnosis**: Call surge with duplicate callers (AEGIS confidence 90%, ORACLE-validated accuracy 100%).
+- **Recovery**: surge_mode · MTTR 2 min · RECOVERED.
+- **Impact**: Avg ambulance arrival 12.5min; Patients sent to full hospitals 4; Critical patients waiting >15 min 4.
+- **Resilience** 73 → 78.
+- **Next**: Dispatcher latency injection (least-tested failure mode in emergency response (108) (15 past runs)).
+

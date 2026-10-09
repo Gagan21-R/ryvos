@@ -22,6 +22,7 @@ let lastId = 0;
 let playing = false;
 const listeners = new Set();
 const emit = () => listeners.forEach((l) => l());
+const isPaused = () => !!store.get().live?.status?.paused;   // stopped: hold the current beat and frame
 
 // ---- narrated replay: the map/topology show the twin as it was at the moment being narrated
 const states = new Map();          // "round:t" -> state (last ~200 ticks)
@@ -46,6 +47,10 @@ function nextLimit() {             // don't let the replay run past the next eve
 }
 function tickDisplay() {
   const live = store.get().live?.state;
+  if (isPaused()) {
+    if (!display && live) { display = live; emitDisplay(); }
+    return;
+  }
   let next = live;
   if (cursor && (playing || queue.length)) {
     if (live && cursor.round === live.round && cursor.t < Math.min(nextLimit(), live.t)) cursor = { ...cursor, t: cursor.t + 1 };
@@ -147,7 +152,7 @@ function applyBeat(b) {
 }
 
 function play() {
-  if (playing) return;
+  if (playing || isPaused()) return;
   const b = queue.shift();
   if (!b) return;
   playing = true;
@@ -196,7 +201,11 @@ export function startStory() {
   let prev = null;
   setInterval(tickDisplay, 450);
   let prevState = null;
+  let wasPaused = false;
   store.subscribe(() => {
+    const paused = isPaused();
+    if (wasPaused && !paused) play();                  // Play pressed: continue the story where it stopped
+    wasPaused = paused;
     const st = store.get().live?.state;
     if (st && st !== prevState) { prevState = st; remember(st); if (!cursor) tickDisplay(); }
     const ev = store.get().live?.events;
