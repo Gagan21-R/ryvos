@@ -9,7 +9,7 @@ export default defineConfig({
     outDir: "dist",
     rollupOptions: {
       output: {
-        manualChunks: { react: ["react", "react-dom"], motion: ["motion"], map: ["leaflet"], charts: ["recharts"] },
+        manualChunks: { react: ["react", "react-dom"], map: ["leaflet"], charts: ["recharts"] },
       },
     },
   },

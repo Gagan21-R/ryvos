@@ -73,7 +73,7 @@ export async function act(key, fn, okText, tone) {
     if (okText) toast(okText, tone);
     return r;
   } catch (e) {
-    toast(`⚠ ${e.message}`, "rogue");
+    toast(e.message, "bad");
     return null;
   } finally {
     setTimeout(() => busy.delete(key), 800);

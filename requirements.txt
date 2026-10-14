@@ -3,6 +3,8 @@ redis>=5
 fastapi>=0.110
 uvicorn>=0.29
 pydantic>=2
+# real-data validation (realdata/): anomaly detector on NAB telemetry
+numpy>=1.24
 # tests (fastapi.testclient)
 httpx2
 # optional: record the demo video (python -m tools.record_demo)

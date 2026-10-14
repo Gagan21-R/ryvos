@@ -28,4 +28,9 @@ export const api = {
   safetyTest: (domain) => request("/api/safety/test", { method: "POST", body: { domain } }),
   control: (body) => request("/api/control", { method: "POST", body }),
   chat: (message, context) => request("/api/chat", { method: "POST", body: { message, context } }),
+  realModel: () => request("/api/real/model"),
+  realTrain: () => request("/api/real/train", { method: "POST" }),
+  realSeries: (id) => request(`/api/real/series?id=${encodeURIComponent(id)}`),
+  realSweep: () => request("/api/real/sweep"),
+  realLive: () => request("/api/real/live"),
 };

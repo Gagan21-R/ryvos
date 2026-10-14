@@ -45,11 +45,11 @@ export default function ArenaMap({ height = 460, toggles, compact = false, state
       <div ref={slot} className="map-slot" role="application" aria-label="Live geographic map of the active scenario" />
       <div className="map-overlay map-crumbs" aria-label="Map level">
         {hierarchy.map((lv) => <span key={lv} className={focus?.level === lv ? "on" : ""}>{lv}</span>)}
-        <span className="on" style={{ background: "transparent", color: "var(--muted)", borderStyle: "dashed", borderColor: "var(--line)" }}>simulated entities</span>
+        <span className="note">simulated entities</span>
       </div>
       <div className="map-overlay map-tools">
-        <button className="icon-btn" onClick={recenter} aria-label="Re-centre on the active focus" title="Re-centre"><Crosshair size={17} /></button>
-        <button className="icon-btn" onClick={() => openAssist("Why did the map zoom here?")} aria-label="Ask ORACLE about this map" title="Explain this map"><MessageCircleQuestion size={17} /></button>
+        <button className="icon-btn" onClick={recenter} aria-label="Re-centre on the active focus" title="Re-centre"><Crosshair size={16} /></button>
+        <button className="icon-btn" onClick={() => openAssist("Why did the map zoom here?")} aria-label="Ask ORACLE about this map" title="Explain this map"><MessageCircleQuestion size={16} /></button>
       </div>
       {focus && !compact && (
         <div className="map-overlay map-focus">

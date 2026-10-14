@@ -89,5 +89,19 @@ for q in ("Why did AEGIS choose this recovery?", "Why is the confidence 91%?", "
     r = c.post("/api/chat", json={"message": q, "context": {"page": "metrics", "chart": "resilience"}})
     check(f"chat: {q!r} -> {r.json().get('intent')}", r.status_code == 200 and r.json()["answer"])
 
+print("5. Real-data validation (NAB)")
+m = c.get("/api/real/model").json()
+check("model has learned settings", all(k in m["params"] for k in ("window_h", "threshold", "persist", "alpha", "cooldown_h")))
+check(f"24 real series, {m['test']['trained']['incidents']} unseen test incidents", len(m["per_series"]) == 24 and m["test"]["trained"]["incidents"] > 0)
+check(f"trained model beats the untrained rule on unseen data (F1 {m['test']['untrained']['f1']} -> {m['test']['trained']['f1']})",
+      m["test"]["trained"]["f1"] >= m["test"]["untrained"]["f1"])
+check("trained model cuts false alarms on unseen data", m["test"]["trained"]["false_alarms"] < m["test"]["untrained"]["false_alarms"])
+s = c.get("/api/real/series", params={"id": "realKnownCause/nyc_taxi"}).json()
+check(f"series payload: {s['points_shown']} of {s['points_total']} points, {len(s['windows'])} labelled windows",
+      s["points_total"] == 10320 and len(s["windows"]) == 5 and all(a["i"] in {p["i"] for p in s["points"]} for a in s["alerts"]))
+check("unknown series -> 404", c.get("/api/real/series", params={"id": "nope"}).status_code == 404)
+check("threshold sweep covers the learned threshold", any(r["trained"] for r in c.get("/api/real/sweep").json()))
+check("live probe endpoint answers", "targets" in c.get("/api/real/live").json())
+
 print(f"\n{passed} passed, {failed} failed")
 raise SystemExit(1 if failed else 0)

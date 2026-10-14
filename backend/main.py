@@ -23,6 +23,7 @@ from backend.chatbot import oracle_assist
 from backend.geography.map_data import geography, resolve_focus
 from backend.models.schemas import ChatRequest, ChatResponse, Control, RoundStart, SafetyTest
 from oracle.policy import POLICY, evaluate
+from realdata import detector, probe
 from shared import bus, config, names
 
 DIST = config.ROOT / "frontend" / "dist"
@@ -41,6 +42,7 @@ async def lifespan(_app):
         else:
             lp.default_exception_handler(ctx)
     loop.set_exception_handler(quiet)
+    probe.start()                 # live HTTPS latency probe (real-time data for the trained detector)
     yield
 
 
@@ -268,6 +270,38 @@ def health():
         redis_ok = False
     return {"backend": "ok", "redis": redis_ok, "arena_live": bool(live.get("state")),
             "frontend_built": (DIST / "index.html").exists()}
+
+
+# ------------------------------------------------------------------ real data (NAB) + live probe
+
+@app.get("/api/real/model")
+def real_model():
+    """The trained detector: learned settings, train/test results vs the untrained rule, per-series results."""
+    return detector.model()
+
+
+@app.post("/api/real/train")
+def real_train():
+    """Re-run the grid search on the train series and re-score the unseen test series."""
+    return detector.train()
+
+
+@app.get("/api/real/series")
+def real_series(id: str = Query(...)):
+    try:
+        return detector.series_payload(id)
+    except KeyError as e:
+        raise HTTPException(404, f"unknown series {id}") from e
+
+
+@app.get("/api/real/sweep")
+def real_sweep():
+    return detector.sweep()
+
+
+@app.get("/api/real/live")
+def real_live():
+    return probe.snapshot()
 
 
 # ------------------------------------------------------------------ frontend

@@ -1,7 +1,7 @@
+import { ChevronRight } from "lucide-react";
 import { Fragment, useState } from "react";
+import { AgentBadge, SystemTabs } from "../components/common/ui.jsx";
 import { useArena } from "../state/arenaStore.js";
-
-const DOMS = [["all", "All"], ["emergency", "🚑 108"], ["food", "🛵 Delivery"], ["upi", "💳 UPI"]];
 
 export default function Incidents() {
   const reports = useArena((s) => s.learn.reports) || [];
@@ -9,21 +9,23 @@ export default function Incidents() {
   const list = [...reports].reverse().filter((r) => dom === "all" || r.domain === dom);
   return (
     <div className="page">
-      <div className="eyebrow">ORACLE incident reports</div>
-      <h1 className="h-page">Incidents</h1>
-      <div className="row" style={{ justifyContent: "space-between", marginBottom: 18 }}>
-        <p className="lede">Written automatically after every round: what ROGUE did, how AEGIS responded, what ORACLE verified, and what everyone learned.</p>
-        <div className="tabs">{DOMS.map(([id, l]) => <button key={id} className={dom === id ? "on" : ""} onClick={() => setDom(id)}>{l}</button>)}</div>
+      <div className="page-head">
+        <div>
+          <div className="eyebrow">Incident reports</div>
+          <h1 className="h-page">Incidents</h1>
+          <p className="lede">Written automatically by ORACLE after every round: what ROGUE did, how AEGIS responded, what was verified and what was learned.</p>
+        </div>
+        <SystemTabs value={dom} onChange={setDom} withAll />
       </div>
       {!list.length && <div className="empty">No incident reports yet. Run an autonomous round.</div>}
       <div className="list">
         {list.map((r, i) => (
           <details key={r.id} className="report" open={i === 0}>
             <summary>
-              <span className="chip oracle mono">{r.id}</span>
+              <span className="chip mono">{r.id}</span>
               <span><b>{r.scenario}</b> <span className="muted">· {r.title}</span></span>
-              <span className={`chip ${r.verification === "RECOVERED" ? "ok" : "bad"}`}>{r.verification}</span>
-              <span className="mono" style={{ fontWeight: 700 }}>{r.resilience_prev ?? "—"} → {r.resilience}</span>
+              <span className={`chip ${r.verification === "RECOVERED" ? "ok" : "bad"}`}>{r.verification === "RECOVERED" ? "Recovered" : r.verification}</span>
+              <span className="mono" style={{ fontWeight: 500 }}>{r.resilience_prev ?? "—"} → {r.resilience} <ChevronRight size={14} style={{ verticalAlign: -2 }} /></span>
             </summary>
             <div className="body">
               <dl className="kv">
@@ -42,10 +44,10 @@ export default function Incidents() {
               </dl>
               <div>
                 <dl className="kv">{Object.entries(r.impact).map(([k, v]) => <Fragment key={k}><dt>{k}</dt><dd>{v}</dd></Fragment>)}</dl>
-                <div style={{ marginTop: 10, display: "grid", gap: 6, fontSize: 12.5 }}>
-                  <div><span className="chip rogue">ROGUE</span> {r.learning.rogue}</div>
-                  <div><span className="chip aegis">AEGIS</span> {r.learning.aegis}</div>
-                  <div><span className="chip oracle">ORACLE</span> {r.learning.oracle}</div>
+                <div style={{ marginTop: 14, display: "grid", gap: 10, fontSize: 13 }}>
+                  {["rogue", "aegis", "oracle"].map((a) => (
+                    <div key={a} style={{ display: "grid", gridTemplateColumns: "32px 1fr", gap: 10, alignItems: "start" }}><AgentBadge agent={a} /><span>{r.learning[a]}</span></div>
+                  ))}
                   <div><b>Next:</b> {r.next.label} ({r.next.why.toLowerCase()})</div>
                 </div>
               </div>

@@ -8,7 +8,7 @@ RUN npm run build
 
 FROM python:3.12-slim
 WORKDIR /app
-RUN pip install --no-cache-dir "redis>=5" "fastapi>=0.110" "uvicorn>=0.29" "pydantic>=2"
+RUN pip install --no-cache-dir "redis>=5" "fastapi>=0.110" "uvicorn>=0.29" "pydantic>=2" "numpy>=1.24"
 COPY . .
 COPY --from=frontend /app/frontend/dist ./frontend/dist
 ENV PYTHONUNBUFFERED=1 PYTHONIOENCODING=utf-8

@@ -1,23 +1,25 @@
 // Charts (Recharts) + the resilience gauge. Every chart card has an "Explain" button wired to ORACLE ASSIST.
-import { Sparkles } from "lucide-react";
-import { motion } from "motion/react";
+import { MessageSquare } from "lucide-react";
 import {
   Bar, BarChart, CartesianGrid, Cell, Line, LineChart, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart,
   Tooltip, XAxis, YAxis, ZAxis,
 } from "recharts";
 import { openAssist } from "../../state/arenaStore.js";
 
-const INK = "#0e0e10", GRID = "rgba(14,14,16,.08)", MUTED = "#77746c";
-const axis = { stroke: MUTED, fontSize: 11, tickLine: false, axisLine: { stroke: "rgba(14,14,16,.25)" } };
-const tip = { contentStyle: { background: INK, border: 0, borderRadius: 10, color: "#f3efe6", fontSize: 12 }, itemStyle: { color: "#f3efe6" }, labelStyle: { color: "#b8b3a6" } };
+export const C = { ink: "#1c1836", accent: "#4b2bb3", accentLight: "#a796e3", aegis: "#1f5fc4", rogue: "#b4490f", ok: "#17784b",
+  warn: "#9a5b06", bad: "#b3261e", muted: "#6c6981", grid: "#ecebf0", line: "#cbc8d6" };
+const INK = C.ink, GRID = C.grid, MUTED = C.muted;
+export const axis = { stroke: MUTED, fontSize: 11.5, tickLine: false, axisLine: { stroke: C.line } };
+export const tip = { contentStyle: { background: "#fff", border: `1px solid ${C.line}`, borderRadius: 4, color: INK, fontSize: 12.5, boxShadow: "0 4px 14px rgba(28,24,54,.12)" },
+  itemStyle: { color: INK }, labelStyle: { color: MUTED } };
 
 export function ChartCard({ title, hint, chart, question, children, height = 250 }) {
   return (
-    <div className="card soft">
+    <div className="card">
       <div className="card-title">
-        <div><h3>{title}</h3>{hint && <div className="muted" style={{ fontSize: 12, fontWeight: 600 }}>{hint}</div>}</div>
+        <div><h3>{title}</h3>{hint && <div className="sub">{hint}</div>}</div>
         <button className="explain-btn" onClick={() => openAssist(question || "Explain this graph", chart)} aria-label={`Explain the ${title} graph`}>
-          <Sparkles size={13} /> Explain
+          <MessageSquare size={13} /> Explain
         </button>
       </div>
       <div className="chart-box" style={{ height }}>{children}</div>
@@ -27,28 +29,27 @@ export function ChartCard({ title, hint, chart, question, children, height = 250
 
 export function ResilienceGauge({ value, prev, size = 170 }) {
   const r = 70, c = 2 * Math.PI * r, v = value ?? 0;
-  const color = v >= 80 ? "#0f9d58" : v >= 60 ? "#e8920c" : "#e5194f";
+  const color = v >= 80 ? C.ok : v >= 60 ? C.warn : C.bad;
   return (
     <svg width={size} height={size} viewBox="0 0 180 180" role="img" aria-label={`Resilience score ${value ?? "unknown"} out of 100`}>
-      <circle cx="90" cy="90" r={r} fill="none" stroke="#e9e3d6" strokeWidth="16" />
-      <motion.circle cx="90" cy="90" r={r} fill="none" stroke={color} strokeWidth="16" strokeLinecap="round" transform="rotate(-90 90 90)"
-        strokeDasharray={c} initial={{ strokeDashoffset: c }} animate={{ strokeDashoffset: c * (1 - v / 100) }} transition={{ duration: 1.2, ease: "easeOut" }} />
-      <text x="90" y="96" textAnchor="middle" fontFamily="Space Grotesk" fontWeight="700" fontSize="46" fill={INK}>{value ?? "—"}</text>
-      <text x="90" y="122" textAnchor="middle" fontSize="12" fontWeight="700" fill={MUTED}>/ 100{prev != null ? ` · was ${prev}` : ""}</text>
+      <circle cx="90" cy="90" r={r} fill="none" stroke={C.grid} strokeWidth="12" />
+      <circle cx="90" cy="90" r={r} fill="none" stroke={color} strokeWidth="12" transform="rotate(-90 90 90)"
+        strokeDasharray={c} strokeDashoffset={c * (1 - v / 100)} />
+      <text x="90" y="98" textAnchor="middle" fontFamily="IBM Plex Sans" fontWeight="600" fontSize="44" fill={INK}>{value ?? "—"}</text>
+      <text x="90" y="122" textAnchor="middle" fontFamily="IBM Plex Sans" fontSize="12.5" fill={MUTED}>of 100{prev != null ? ` · was ${prev}` : ""}</text>
     </svg>
   );
 }
 
 export function ComponentBars({ components }) {
   if (!components) return null;
-  const colors = { detection: "#ff8a3d", diagnosis: "#1f6bff", recovery: "#0f9d58", safety: "#7a4dff", adaptability: "#e5194f" };
   return (
     <div className="comp-bars">
       {Object.entries(components).map(([k, v]) => (
         <div className="cb" key={k}>
           <span style={{ textTransform: "capitalize" }}>{k}</span>
-          <div className="track"><motion.i style={{ background: colors[k] }} initial={{ width: 0 }} animate={{ width: `${v}%` }} transition={{ duration: 0.9 }} /></div>
-          <b className="mono">{v}</b>
+          <div className="track"><i style={{ width: `${v}%` }} /></div>
+          <b className="num" style={{ fontWeight: 500, textAlign: "right" }}>{v}</b>
         </div>
       ))}
     </div>
@@ -63,8 +64,8 @@ export function ResilienceChart({ series }) {
         <XAxis dataKey="domain_round" {...axis} />
         <YAxis domain={[0, 100]} {...axis} />
         <Tooltip {...tip} />
-        <Line dataKey="round_score" name="Round score" stroke="#b49bff" strokeWidth={1.5} dot={false} isAnimationActive />
-        <Line dataKey="resilience" name="Resilience" stroke="#7a4dff" strokeWidth={3} dot={false} isAnimationActive animationDuration={900} />
+        <Line dataKey="round_score" name="Round score" stroke={C.accentLight} strokeWidth={1.2} dot={false} isAnimationActive={false} />
+        <Line dataKey="resilience" name="Resilience" stroke={C.accent} strokeWidth={2.2} dot={false} isAnimationActive={false} />
       </LineChart>
     </ResponsiveContainer>
   );
@@ -78,8 +79,8 @@ export function TimesChart({ series, unit }) {
         <XAxis dataKey="domain_round" {...axis} />
         <YAxis {...axis} unit={unit === "min" ? "m" : "s"} />
         <Tooltip {...tip} />
-        <Line dataKey="mttd" name={`MTTD (${unit}, simulated)`} stroke="#ff8a3d" strokeWidth={2.5} dot={{ r: 2 }} connectNulls />
-        <Line dataKey="mttr" name={`MTTR (${unit}, simulated)`} stroke="#1f6bff" strokeWidth={2.5} dot={{ r: 2 }} connectNulls />
+        <Line dataKey="mttd" name={`MTTD (${unit}, simulated)`} stroke={C.rogue} strokeWidth={1.8} dot={false} connectNulls isAnimationActive={false} />
+        <Line dataKey="mttr" name={`MTTR (${unit}, simulated)`} stroke={C.aegis} strokeWidth={1.8} dot={false} connectNulls isAnimationActive={false} />
       </LineChart>
     </ResponsiveContainer>
   );
@@ -94,8 +95,8 @@ export function ImpactChart({ series, metric, baseline }) {
         <YAxis {...axis} />
         <Tooltip {...tip} />
         {baseline != null && <ReferenceLine y={baseline} stroke={MUTED} strokeDasharray="6 6" label={{ value: "normal day", fill: MUTED, fontSize: 11, position: "insideTopLeft" }} />}
-        <Line dataKey="headline" name={metric?.label} stroke={INK} strokeWidth={2.5}
-          dot={(p) => <circle key={p.index} cx={p.cx} cy={p.cy} r={p.payload.blue ? 2.5 : 6} fill={p.payload.blue ? INK : "#e5194f"} />} />
+        <Line dataKey="headline" name={metric?.label} stroke={INK} strokeWidth={1.6} isAnimationActive={false}
+          dot={(p) => <circle key={p.index} cx={p.cx} cy={p.cy} r={p.payload.blue ? 1.8 : 4.5} fill={p.payload.blue ? INK : C.bad} />} />
       </LineChart>
     </ResponsiveContainer>
   );
@@ -109,8 +110,8 @@ export function RecoveryBars({ series }) {
         <XAxis dataKey="domain_round" {...axis} />
         <YAxis {...axis} />
         <Tooltip {...tip} />
-        <Bar dataKey="mttr" name="Time incidents stayed open" radius={[5, 5, 0, 0]}>
-          {series.map((s, i) => <Cell key={i} fill={!s.blue ? "#e5194f" : s.playbook ? "#0a8fc9" : "#b8b3a6"} />)}
+        <Bar dataKey="mttr" name="Time incidents stayed open" isAnimationActive={false}>
+          {series.map((s, i) => <Cell key={i} fill={!s.blue ? C.bad : s.playbook ? C.aegis : C.line} />)}
         </Bar>
       </BarChart>
     </ResponsiveContainer>
@@ -125,8 +126,8 @@ export function BeliefBars({ q, labels }) {
         <XAxis type="number" domain={[0, 100]} {...axis} unit="%" />
         <YAxis type="category" dataKey="name" width={170} {...axis} />
         <Tooltip {...tip} />
-        <Bar dataKey="value" name="Expected damage" radius={[0, 6, 6, 0]}>
-          {data.map((d, i) => <Cell key={i} fill={`rgba(255,59,107,${0.35 + d.value / 150})`} />)}
+        <Bar dataKey="value" name="Expected damage" isAnimationActive={false}>
+          {data.map((d, i) => <Cell key={i} fill={C.rogue} fillOpacity={0.35 + d.value / 150} />)}
         </Bar>
       </BarChart>
     </ResponsiveContainer>
@@ -144,7 +145,7 @@ export function ChoiceScatter({ series, attacks }) {
         <YAxis type="number" dataKey="y" domain={[-0.5, cats.length - 0.5]} ticks={cats.map((_, i) => i)} tickFormatter={(i) => (attacks?.[cats[i]]?.label || "").split(" ").slice(0, 2).join(" ")} width={110} {...axis} />
         <ZAxis dataKey="z" range={[30, 320]} />
         <Tooltip {...tip} formatter={(v, n, p) => (n === "y" ? attacks?.[cats[v]]?.label : v)} />
-        <Scatter data={data} fill="#ff3b6b" fillOpacity={0.55} stroke="#0e0e10" />
+        <Scatter data={data} fill={C.rogue} fillOpacity={0.45} stroke={C.rogue} isAnimationActive={false} />
       </ScatterChart>
     </ResponsiveContainer>
   );

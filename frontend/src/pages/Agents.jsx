@@ -1,6 +1,5 @@
-import { motion } from "motion/react";
-import Bot from "../components/agents/Bot.jsx";
-import OracleOrb from "../components/agents/OracleOrb.jsx";
+import { agentState } from "../components/agents/AgentSpeech.jsx";
+import { AgentBadge } from "../components/common/ui.jsx";
 import { useArena } from "../state/arenaStore.js";
 import { useStory } from "../story/director.js";
 
@@ -12,29 +11,44 @@ export default function Agents() {
   const book = Object.values(learn.playbook || {});
   const avg = (xs) => (xs.length ? Math.round(xs.reduce((a, b) => a + b, 0) / xs.length) : "—");
   const cards = [
-    { id: "rogue", name: "ROGUE", tag: "The Challenger", color: "var(--rogue)", char: <Bot kind="rogue" mood={story.agents.rogue.mood} size={170} />,
-      text: "Playful, curious, a little unpredictable, never evil. ROGUE observes the system, picks a weakness with a multi-armed bandit, estimates severity, asks ORACLE for permission and only then runs a controlled, reversible failure.",
-      stats: [["Experiments run", results.reduce((a, r) => a + r.attacks.length, 0)], ["Blocked by ORACLE", verdicts.filter((v) => !v.approved).length], ["Avg damage", `${avg(results.map((r) => r.red_reward * 100))}%`]] },
-    { id: "aegis", name: "AEGIS", tag: "The Guardian", color: "var(--aegis)", char: <Bot kind="aegis" mood={story.agents.aegis.mood} size={170} />,
-      text: "Calm, protective and focused. AEGIS monitors every service, detects anomalies, diagnoses the root cause with an evidence-based confidence, applies only whitelisted fixes, verifies recovery and saves what worked to its playbook.",
-      stats: [["Playbook lessons", book.length], ["Avg root-cause confidence", `${avg(results.map((r) => r.aegis_confidence).filter((x) => x != null))}%`], ["Recovered rounds", results.filter((r) => r.resolved).length]] },
-    { id: "oracle", name: "ORACLE", tag: "The Referee", color: "var(--oracle)", char: <OracleOrb mood={story.agents.oracle.mood} size={150} />,
-      text: "Neutral, analytical, never a competitor. ORACLE validates every experiment against the safety policy, independently checks AEGIS's diagnosis against the experiment record, measures MTTD/MTTR, scores resilience and narrates.",
+    { id: "rogue", name: "ROGUE", tag: "Challenger",
+      method: "Multi-armed bandit (ε-greedy, reinforcement learning)",
+      text: "Observes the system, picks the weakness that has caused the most damage so far, estimates severity, asks ORACLE for permission and only then runs a controlled, reversible failure.",
+      stats: [["Experiments run", results.reduce((a, r) => a + r.attacks.length, 0)], ["Blocked by ORACLE", verdicts.filter((v) => !v.approved).length], ["Average damage", `${avg(results.map((r) => r.red_reward * 100))}%`]] },
+    { id: "aegis", name: "AEGIS", tag: "Guardian",
+      method: "Rule base + learned playbook; anomaly detector trained on real telemetry",
+      text: "Monitors every service, detects anomalies, diagnoses the root cause with an evidence-based confidence score, applies only whitelisted fixes, verifies recovery and saves what worked to its playbook.",
+      stats: [["Playbook lessons", book.length], ["Average root-cause confidence", `${avg(results.map((r) => r.aegis_confidence).filter((x) => x != null))}%`], ["Recovered rounds", results.filter((r) => r.resolved).length]] },
+    { id: "oracle", name: "ORACLE", tag: "Referee",
+      method: "Safety policy + scoring against the experiment record",
+      text: "Validates every experiment against the safety policy, checks AEGIS's diagnosis against what was actually injected, measures MTTD and MTTR, scores resilience and writes the incident report.",
       stats: [["Verdicts given", verdicts.length], ["Validated accuracy", `${avg(results.map((r) => r.oracle?.accuracy).filter((x) => x != null))}%`], ["Rounds scored", results.length]] },
   ];
   return (
     <div className="page">
-      <div className="eyebrow">The cast</div>
-      <h1 className="h-page">Agents</h1>
-      <div className="learn-cards" style={{ marginTop: 18 }}>
-        {cards.map((c, i) => (
-          <motion.div key={c.id} className={`learn-card ${c.id}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
-            <div style={{ display: "grid", placeItems: "center", minHeight: 210 }}>{c.char}</div>
-            <div><div className="big-num" style={{ fontSize: 40, color: c.color }}>{c.name}</div><div className="eyebrow">{c.tag}</div></div>
+      <div className="page-head">
+        <div>
+          <div className="eyebrow">Agents</div>
+          <h1 className="h-page">Three agents, one closed loop</h1>
+          <p className="lede">Each agent is a separate process. They never call each other directly: every message goes through the event bus.</p>
+        </div>
+      </div>
+      <div className="learn-cards">
+        {cards.map((c) => (
+          <div key={c.id} className="learn-card">
+            <div className="who">
+              <AgentBadge agent={c.id} size="lg" />
+              <div><b>{c.name}</b><div className="muted" style={{ fontSize: 13 }}>{c.tag}</div></div>
+              <span className="chip" style={{ marginLeft: "auto" }}>{agentState(story.agents[c.id].mood)}</span>
+            </div>
             <p style={{ margin: 0, color: "var(--ink-2)" }}>{c.text}</p>
-            <dl className="kv">{c.stats.map(([k, v]) => [<dt key={k}>{k}</dt>, <dd key={`${k}v`}>{v}</dd>])}</dl>
-            <div className="bubble" style={{ background: c.color }}>{story.agents[c.id].speech || "…"}</div>
-          </motion.div>
+            <div className="chip" style={{ whiteSpace: "normal", alignSelf: "flex-start" }}>{c.method}</div>
+            <dl className="kv" style={{ borderTop: "1px solid var(--line)", paddingTop: 12 }}>{c.stats.map(([k, v]) => [<dt key={k}>{k}</dt>, <dd key={`${k}v`} className="num">{v}</dd>])}</dl>
+            <div style={{ borderTop: "1px solid var(--line)", paddingTop: 12 }}>
+              <div className="eyebrow" style={{ marginBottom: 4 }}>Latest message</div>
+              <div style={{ fontSize: 14 }}>{story.agents[c.id].speech || "Waiting for the next round."}</div>
+            </div>
+          </div>
         ))}
       </div>
     </div>

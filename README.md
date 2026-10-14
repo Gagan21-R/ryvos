@@ -14,11 +14,27 @@ Three AI characters run an autonomous resilience-testing loop on a sandboxed dig
 
 `DISCOVER → PLAN → SAFETY CHECK → DISRUPT → DETECT → DIAGNOSE → RECOVER → VERIFY → LEARN → ADAPT`
 
+The interface follows an enterprise reliability-product style: one accent colour, flat panels, IBM Plex type, no decorative animation.
+
 Three systems can be put in the arena: **🚑 108 emergency response**, **🛵 food delivery (with free-delivery zones)** and **💳 UPI payments**.
 
 > Honest by design: this is a **sandbox simulation**. There is no connection to real 108 dispatch, the UPI network, banks
 > or delivery companies. Telemetry is prototype telemetry derived from the simulation; stations, zones, routes and banks are
 > simulated. Map tiles © OpenStreetMap contributors; administrative boundaries from geoBoundaries.
+
+## Real-data validation
+
+The arena is a simulation, but AEGIS's anomaly detector is also trained and tested on **real, labelled telemetry**:
+the [Numenta Anomaly Benchmark](https://github.com/numenta/NAB) (MIT licence), stored in `data/real/`.
+
+- **Train:** 17 AWS CloudWatch series (CPU, network, disk, request counts). **Test:** 7 real failures with a documented cause, never seen in training.
+- **Model** (`realdata/detector.py`): robust z-score against a trailing window (median / MAD), exponential smoothing, an alert
+  when the score stays above a threshold for N points, then a cool-down. Training is a grid search over those settings on the
+  train series only, maximising F1 against the expert-labelled incident windows.
+- **Scoring:** an incident is detected if an alert falls inside its labelled window; any other alert is a false alarm.
+- **Live data** (`realdata/probe.py`): real HTTPS response times to public endpoints every 15 s, scored online by the trained detector.
+- `python -m realdata.detector` retrains and prints the results; the **Real-data validation** page shows every series, every
+  alert and the labelled incidents, links to the source CSVs and can retrain from the browser.
 
 ## Run it
 
@@ -40,7 +56,8 @@ On this PC, use the full Python path: `& "C:\Users\Gagan R\AppData\Local\Program
 | `python run_all.py --reset` | forget everything learned |
 | `python run_all.py --legacy` / `--streamlit` | previous dashboards |
 | `cd frontend && npm run dev` | frontend dev server on :5173 (proxies /api to :8501) |
-| `python -m tests.smoke_test` | 70 automated checks (twins, safety policy, confidence, API, chat) |
+| `python -m tests.smoke_test` | automated checks (twins, safety policy, confidence, API, chat, real-data model) |
+| `python -m realdata.detector` | retrain the anomaly detector on the real NAB data and print train/test results |
 | `python -m tools.build_geo` | re-download the boundary GeoJSON from geoBoundaries |
 
 ## Deploy
@@ -96,6 +113,11 @@ bounds the scenario's `focus` gives it.
 | GET | `/api/scenarios` | scenario library (id, category, geography, target, severity, blastRadius, baseline, failureState, recoveryStrategy, allowed) |
 | GET | `/api/geography?domain=` | real boundaries + simulated layers + zoom hierarchy |
 | GET | `/api/incidents` | ORACLE incident reports |
+| GET | `/api/real/model` | trained detector: learned settings, train/test results vs the untrained rule, per-series results |
+| POST | `/api/real/train` | retrain on the real train series |
+| GET | `/api/real/series?id=` | one real series with its labelled incidents and the detector's alerts |
+| GET | `/api/real/sweep` | test-set precision / recall across alert thresholds |
+| GET | `/api/real/live` | live HTTPS response-time samples, scored by the trained detector |
 | GET | `/api/metrics` | resilience, components, MTTD/MTTR, coverage, accuracy, series |
 | GET | `/api/safety` | policy + recent verdicts |
 | POST | `/api/round/start` | start an autonomous round now (`domain`, optional `scenario` or `attacks`) |

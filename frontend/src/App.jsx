@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from "motion/react";
 import { Component, useEffect, useState } from "react";
 import OracleAssist from "./components/chatbot/OracleAssist.jsx";
 import { PAGES, SideNav, Toasts, TopBar } from "./components/common/Layout.jsx";
@@ -9,12 +8,13 @@ import Learning from "./pages/Learning.jsx";
 import MapPage from "./pages/MapPage.jsx";
 import Metrics from "./pages/Metrics.jsx";
 import Overview from "./pages/Overview.jsx";
+import RealData from "./pages/RealData.jsx";
 import Safety from "./pages/Safety.jsx";
 import Scenarios from "./pages/Scenarios.jsx";
 import { useArena } from "./state/arenaStore.js";
 
 const VIEWS = { overview: Overview, arena: Arena, map: MapPage, scenarios: Scenarios, agents: Agents,
-  incidents: Incidents, metrics: Metrics, learning: Learning, safety: Safety };
+  incidents: Incidents, metrics: Metrics, learning: Learning, realdata: RealData, safety: Safety };
 
 function usePage() {
   const read = () => {
@@ -23,7 +23,7 @@ function usePage() {
   };
   const [page, setPage] = useState(read);
   useEffect(() => {
-    const on = () => { setPage(read()); window.scrollTo({ top: 0, behavior: "smooth" }); };
+    const on = () => { setPage(read()); window.scrollTo({ top: 0 }); };
     window.addEventListener("hashchange", on);
     return () => window.removeEventListener("hashchange", on);
   }, []);
@@ -49,14 +49,9 @@ export default function App() {
       <TopBar />
       <SideNav page={page} />
       <main className="main" id="main">
-        {conn === "down" && <div className="banner">Backend unavailable: retrying. Start everything with <code className="mono">python run_all.py</code>.</div>}
+        {conn === "down" && <div className="banner">Backend unavailable, retrying. Start everything with <code className="mono">python run_all.py</code>.</div>}
         {conn === "idle" && <div className="banner info">No live updates for a few seconds: the arena may be stopped or between rounds.</div>}
-        <AnimatePresence mode="wait">
-          <motion.div key={page} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.28, ease: "easeOut" }}>
-            <Boundary page={page}><View /></Boundary>
-          </motion.div>
-        </AnimatePresence>
+        <Boundary page={page}><View key={page} /></Boundary>
       </main>
       <OracleAssist page={page} />
       <Toasts />

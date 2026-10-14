@@ -296,7 +296,7 @@ def h_map(c):
 
 def h_ambulance(c):
     if c.domain != "emergency":
-        return "Ambulance questions apply to the 🚑 108 system. Switch to it to see the response map.", [], []
+        return "Ambulance questions apply to the 108 emergency system. Switch to it to see the response map.", [], []
     inc = (c.state.get("geo") or {}).get("incident")
     if not inc:
         return "No open emergency call right now.", [], []
@@ -314,7 +314,7 @@ def h_ambulance(c):
 
 def h_delivery(c):
     if c.domain != "food":
-        return "Free-delivery coverage applies to the 🛵 food system. Switch to it to see the zones.", [], []
+        return "Free-delivery coverage applies to the food delivery system. Switch to it to see the zones.", [], []
     geo = c.state.get("geo") or {}
     drifted = [z for z in geo.get("zones", []) if z["status"] != "ok"]
     cust = geo.get("customers", [])
