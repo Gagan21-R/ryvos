@@ -26,7 +26,7 @@ export default function Wordmark() {
       aria-label="RYVO"
       variants={{ initial: { scale: 1.03 }, animate: { scale: 1, transition: { staggerChildren: 0.06, delayChildren: 0.1, duration: 1.4, ease: EASE } } }}
     >
-      <svg viewBox="0 0 1054 100" className="w-full fill-[#111] overflow-visible" aria-hidden="true">
+      <svg viewBox="0 0 1054 100" className="w-full fill-bone overflow-visible" aria-hidden="true">
         <defs><clipPath id="wm-clip"><rect x="-10" y="-2" width="1080" height="104" /></clipPath></defs>
         <g clipPath="url(#wm-clip)">
           {LETTERS.map((l) => (

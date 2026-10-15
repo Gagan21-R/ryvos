@@ -3,7 +3,8 @@
 // Monochrome, drawn on a canvas. Experiment names come from the live arena when available.
 import { useEffect, useRef } from "react";
 
-const INK = "17,17,17";
+const INK = "238,238,238";
+const ORANGE = "238,96,24", GREEN = "160,202,146";
 const PHASES = [
   { id: "steady", ms: 2200 },
   { id: "inject", ms: 1700 },
@@ -20,8 +21,8 @@ function rand(seed) {                       // small deterministic PRNG so the n
 function build(w, h) {
   const r = rand(11);
   const nodes = [];
-  const cols = 8, rows = 4;
-  const x0 = w * 0.36, x1 = w * 0.8, y0 = h * 0.38, y1 = h * 0.95;
+  const cols = 7, rows = 4;
+  const x0 = w * 0.3, x1 = w * 0.64, y0 = h * 0.36, y1 = h * 0.95;
   for (let c = 0; c < cols; c++) {
     for (let k = 0; k < rows; k++) {
       if (r() < 0.32) continue;
@@ -90,9 +91,9 @@ export default function NetworkField({ experiments = [], className = "" }) {
     }
 
     function label(text, x, y, alpha = 1, bold = false) {
-      ctx.font = `${bold ? 500 : 400} 10px "JetBrains Mono", monospace`;
-      if ("letterSpacing" in ctx) ctx.letterSpacing = "2px";
-      ctx.fillStyle = `rgba(${INK},${alpha})`;
+      ctx.font = `400 11px "Geist Mono", "JetBrains Mono", monospace`;
+      if ("letterSpacing" in ctx) ctx.letterSpacing = "-0.2px";
+      ctx.fillStyle = bold === "bad" ? `rgba(${ORANGE},1)` : bold === "ok" ? `rgba(${GREEN},1)` : `rgba(${INK},${alpha})`;
       ctx.fillText(text.toUpperCase(), x, y);
     }
 
@@ -107,7 +108,7 @@ export default function NetworkField({ experiments = [], className = "" }) {
       net.edges.forEach(([a, b]) => {
         const A = net.nodes[a], B = net.nodes[b];
         const hit = failing() && (a === target || b === target);
-        ctx.strokeStyle = `rgba(${INK},${hit ? 0.5 : 0.11})`;
+        ctx.strokeStyle = hit ? `rgba(${ORANGE},0.7)` : `rgba(${INK},0.1)`;
         ctx.lineWidth = 1;
         ctx.setLineDash(hit ? [3, 4] : []);
         ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.stroke();
@@ -119,7 +120,7 @@ export default function NetworkField({ experiments = [], className = "" }) {
         net.edges.filter((e) => e.includes(target)).forEach(([a, b]) => {
           const O = net.nodes[a === target ? b : a];
           const q = Math.min(1, k * 1.6);
-          ctx.strokeStyle = `rgba(${INK},${0.85 * (1 - k)})`;
+          ctx.strokeStyle = `rgba(${GREEN},${0.9 * (1 - k)})`;
           ctx.lineWidth = 1.6;
           ctx.beginPath(); ctx.moveTo(tn.x, tn.y); ctx.lineTo(tn.x + (O.x - tn.x) * q, tn.y + (O.y - tn.y) * q); ctx.stroke();
         });
@@ -142,7 +143,7 @@ export default function NetworkField({ experiments = [], className = "" }) {
       });
       drops = drops.filter((d) => {
         d.life -= 0.03;
-        ctx.strokeStyle = `rgba(${INK},${Math.max(0, d.life) * 0.7})`;
+        ctx.strokeStyle = `rgba(${ORANGE},${Math.max(0, d.life) * 0.9})`;
         ctx.lineWidth = 1;
         ctx.beginPath(); ctx.moveTo(d.x - 3, d.y - 3); ctx.lineTo(d.x + 3, d.y + 3); ctx.moveTo(d.x + 3, d.y - 3); ctx.lineTo(d.x - 3, d.y + 3); ctx.stroke();
         return d.life > 0;
@@ -152,17 +153,17 @@ export default function NetworkField({ experiments = [], className = "" }) {
       net.nodes.forEach((n, i) => {
         const s = n.core ? 9 : 6;
         const isT = i === target;
-        let fill = "#fcfcfc", stroke = `rgba(${INK},0.55)`;
-        if (isT && P.id === "inject") stroke = `rgba(${INK},1)`;
-        if (isT && P.id === "detect") stroke = `rgba(${INK},1)`;
-        if (isT && P.id === "recover") fill = `rgba(${INK},${1 - k * 0.85})`;
+        let fill = "#101010", stroke = `rgba(${INK},0.5)`;
+        if (isT && P.id === "inject") stroke = `rgba(${ORANGE},1)`;
+        if (isT && P.id === "detect") stroke = `rgba(${ORANGE},1)`;
+        if (isT && P.id === "recover") { fill = `rgba(${GREEN},${1 - k * 0.8})`; stroke = `rgba(${GREEN},1)`; }
         const jx = isT && P.id === "inject" ? (r() - 0.5) * 2.2 : 0;
         ctx.fillStyle = fill; ctx.strokeStyle = stroke; ctx.lineWidth = n.core ? 1.4 : 1;
         ctx.fillRect(n.x - s / 2 + jx, n.y - s / 2, s, s);
         ctx.strokeRect(n.x - s / 2 + jx, n.y - s / 2, s, s);
         if (isT && P.id === "inject") {                     // failure: cross through the service
           ctx.beginPath(); ctx.moveTo(n.x - s, n.y - s); ctx.lineTo(n.x + s, n.y + s); ctx.moveTo(n.x + s, n.y - s); ctx.lineTo(n.x - s, n.y + s);
-          ctx.strokeStyle = `rgba(${INK},0.9)`; ctx.stroke();
+          ctx.strokeStyle = `rgba(${ORANGE},1)`; ctx.stroke();
         }
       });
 
@@ -170,13 +171,13 @@ export default function NetworkField({ experiments = [], className = "" }) {
       if (tn) {
         if (P.id === "inject") {
           const rad = 10 + k * 26;
-          ctx.strokeStyle = `rgba(${INK},${0.6 * (1 - k)})`; ctx.lineWidth = 1;
+          ctx.strokeStyle = `rgba(${ORANGE},${0.7 * (1 - k)})`; ctx.lineWidth = 1;
           ctx.beginPath(); ctx.arc(tn.x, tn.y, rad, 0, Math.PI * 2); ctx.stroke();
         }
         if (P.id === "detect") {
           for (let i = 0; i < 3; i++) {
             const q = (k * 1.5 + i / 3) % 1;
-            ctx.strokeStyle = `rgba(${INK},${0.45 * (1 - q)})`;
+            ctx.strokeStyle = `rgba(${INK},${0.5 * (1 - q)})`;
             ctx.beginPath(); ctx.arc(tn.x, tn.y, 8 + q * 60, 0, Math.PI * 2); ctx.stroke();
           }
           ctx.strokeStyle = `rgba(${INK},0.8)`;
@@ -194,7 +195,7 @@ export default function NetworkField({ experiments = [], className = "" }) {
           ctx.strokeStyle = `rgba(${INK},0.35)`; ctx.lineWidth = 1;
           ctx.beginPath(); ctx.moveTo(tn.x + 10, tn.y - 10); ctx.lineTo(lx - 4, ly + 4); ctx.stroke();
           label(lines[0], lx, ly, 0.55);
-          label(lines[1], lx, ly + 15, 0.95, true);
+          label(lines[1], lx, ly + 15, 0.95, P.id === "recover" ? "ok" : P.id === "inject" ? "bad" : false);
         }
       }
       if (!reduce) raf = requestAnimationFrame(frame);

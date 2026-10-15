@@ -1,6 +1,7 @@
-import { Component, useEffect, useState } from "react";
+import { Component, useEffect, useRef, useState } from "react";
 import OracleAssist from "./components/chatbot/OracleAssist.jsx";
 import { PAGES, SideNav, Toasts, TopBar } from "./components/common/Layout.jsx";
+import { TelemetryStrip, useAutoReveal } from "./components/common/motion.jsx";
 import Agents from "./pages/Agents.jsx";
 import Arena from "./pages/Arena.jsx";
 import Incidents from "./pages/Incidents.jsx";
@@ -44,6 +45,8 @@ export default function App() {
   const page = usePage();
   const conn = useArena((s) => s.connection);
   const View = VIEWS[page];
+  const mainRef = useRef(null);
+  useAutoReveal(mainRef, page);
   if (page === "overview") {          // the landing page brings its own header and navigation
     return (
       <>
@@ -57,9 +60,10 @@ export default function App() {
     <div className="app">
       <TopBar />
       <SideNav page={page} />
-      <main className="main" id="main">
+      <main className="main" id="main" ref={mainRef}>
         {conn === "down" && <div className="banner">Backend unavailable, retrying. Start everything with <code className="mono">python run_all.py</code>.</div>}
         {conn === "idle" && <div className="banner info">No live updates for a few seconds: the arena may be stopped or between rounds.</div>}
+        <TelemetryStrip />
         <Boundary page={page}><View key={page} /></Boundary>
       </main>
       <OracleAssist page={page} />

@@ -4,8 +4,8 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 const COLORS = {
-  unit_free: "#555555", unit_busy: "#111111", unit_problem: "#b3261e", unit_reserve: "#8d8a9c",
-  site: "#17784b", site_bad: "#c27a12", demand: "#b4490f", demand_urgent: "#b3261e", hub: "#111111",
+  unit_free: "#eeeeee", unit_busy: "#eeeeee", unit_problem: "#ee6018", unit_reserve: "#8a8380",
+  site: "#a0ca92", site_bad: "#c9a27e", demand: "#ee6018", demand_urgent: "#ee6018", hub: "#eeeeee",
 };
 const SHAPE = { site: "sq", site_bad: "sq", hub: "sq" };
 const PULSE = new Set(["unit_problem", "site_bad", "demand_urgent"]);
@@ -79,16 +79,16 @@ export function setGeography(geo) {
   markers.clear();
   for (const f of geo.layers.boundaries) {
     const op = f.properties.role === "operational";
-    L.geoJSON(f, { style: { color: "#111111", weight: op ? 1.8 : 1, dashArray: op ? null : "4 6", fillColor: op ? "#111111" : "#111111", fillOpacity: op ? 0.04 : 0.015 } })
+    L.geoJSON(f, { style: { color: "#eeeeee", weight: op ? 1.8 : 1, dashArray: op ? null : "4 6", fillColor: op ? "#eeeeee" : "#eeeeee", fillOpacity: op ? 0.04 : 0.015 } })
       .bindTooltip(`${f.properties.label} · ${f.properties.source}`, { className: "tip", sticky: true })
       .addTo(layers.boundaries);
   }
   for (const c of geo.layers.coverage) {
-    L.circle([c.lat, c.lon], { radius: c.radius_km * 1000, color: "#555555", weight: 1, opacity: 0.35, fillOpacity: 0.035, interactive: false })
+    L.circle([c.lat, c.lon], { radius: c.radius_km * 1000, color: "#eeeeee", weight: 1, opacity: 0.35, fillOpacity: 0.035, interactive: false })
       .addTo(layers.coverage);
   }
   for (const z of geo.layers.zones) {
-    L.polygon(z.polygon, { color: "#17784b", weight: 1.4, dashArray: "5 5", fillColor: "#17784b", fillOpacity: 0.07 })
+    L.polygon(z.polygon, { color: "#a0ca92", weight: 1.4, dashArray: "5 5", fillColor: "#a0ca92", fillOpacity: 0.07 })
       .bindTooltip(z.label, { className: "tip", sticky: true }).addTo(layers.zones);
     const c = z.polygon.reduce((a, p) => [a[0] + p[0] / z.polygon.length, a[1] + p[1] / z.polygon.length], [0, 0]);
     L.marker(c, { interactive: false, icon: L.divIcon({ className: "zone-label", html: z.name, iconSize: [110, 12], iconAnchor: [55, 6] }) }).addTo(layers.labels);
@@ -147,7 +147,7 @@ export function update(state, boundaryByName) {
   layers.incident.clearLayers();
   if (inc) {
     if (inc.route?.length > 1) {
-      L.polyline(inc.route, { color: "#b3261e", weight: 3, opacity: 0.85, className: "route-line" })
+      L.polyline(inc.route, { color: "#ee6018", weight: 3, opacity: 0.85, className: "route-line" })
         .bindTooltip(`Simulated response route (straight-line) · ETA ~${inc.eta_min ?? "?"} min`, { className: "tip", sticky: true })
         .addTo(layers.incident);
     }
@@ -157,7 +157,7 @@ export function update(state, boundaryByName) {
     L.marker([inc.hospital.lat, inc.hospital.lon], { icon: big(ICONS.hospital), zIndexOffset: 800 }).bindTooltip(`${inc.hospital.label} · ${inc.hospital.free_beds} beds free`, { className: "tip" }).addTo(layers.incident);
   }
   for (const g of geo.ghosts || []) {
-    L.circleMarker([g.lat, g.lon], { radius: 6, color: "#b3261e", weight: 1.5, dashArray: "2 3", fillOpacity: 0 })
+    L.circleMarker([g.lat, g.lon], { radius: 6, color: "#ee6018", weight: 1.5, dashArray: "2 3", fillOpacity: 0 })
       .bindTooltip(`${g.id}: frozen GPS position (what dispatch believes)`, { className: "tip" }).addTo(layers.incident);
   }
   }
@@ -167,10 +167,10 @@ export function update(state, boundaryByName) {
   layers.affected.clearLayers();
   for (const a of geo.affected || []) {
     if (a.type === "circle") {
-      L.circle([a.lat, a.lon], { radius: a.radius_km * 1000, color: "#b3261e", weight: 1.6, fillColor: "#b3261e", fillOpacity: 0.1, className: "route-line" })
+      L.circle([a.lat, a.lon], { radius: a.radius_km * 1000, color: "#ee6018", weight: 1.6, fillColor: "#ee6018", fillOpacity: 0.1, className: "route-line" })
         .bindTooltip(a.label, { className: "tip" }).addTo(layers.affected);
     } else if (a.type === "region" && boundaryByName?.[a.name]) {
-      L.geoJSON(boundaryByName[a.name], { style: { color: "#b3261e", weight: 2, fillColor: "#b3261e", fillOpacity: 0.1 } })
+      L.geoJSON(boundaryByName[a.name], { style: { color: "#ee6018", weight: 2, fillColor: "#ee6018", fillOpacity: 0.1 } })
         .bindTooltip(a.label, { className: "tip", sticky: true }).addTo(layers.affected);
     }
   }
@@ -181,15 +181,15 @@ export function update(state, boundaryByName) {
   layers.customers.clearLayers();
   for (const z of geo.zones || []) {
     if (z.configured) {
-      L.polygon(z.configured, { color: z.status === "restored" ? "#17784b" : "#b3261e", weight: 2, fillOpacity: 0.1,
-        fillColor: z.status === "restored" ? "#17784b" : "#b3261e" })
+      L.polygon(z.configured, { color: z.status === "restored" ? "#a0ca92" : "#ee6018", weight: 2, fillOpacity: 0.1,
+        fillColor: z.status === "restored" ? "#a0ca92" : "#ee6018" })
         .bindTooltip(`${z.name}: configured free-delivery boundary (${z.status})`, { className: "tip", sticky: true }).addTo(layers.customers);
     }
   }
   for (const c of geo.customers || []) {
     const wrong = c.truly_free && !c.free;
-    L.circleMarker([c.lat, c.lon], { radius: wrong ? 5 : 3.5, weight: wrong ? 2 : 1, color: wrong ? "#b3261e" : c.free ? "#17784b" : "#8d8a9c",
-      fillColor: wrong ? "#b3261e" : c.free ? "#17784b" : "#8d8a9c", fillOpacity: 0.8 })
+    L.circleMarker([c.lat, c.lon], { radius: wrong ? 5 : 3.5, weight: wrong ? 2 : 1, color: wrong ? "#ee6018" : c.free ? "#a0ca92" : "#8a8380",
+      fillColor: wrong ? "#ee6018" : c.free ? "#a0ca92" : "#8a8380", fillOpacity: 0.8 })
       .bindTooltip(wrong ? "Inside the service area but shown a delivery fee" : c.free ? "Free delivery" : "Outside free-delivery zone", { className: "tip" })
       .addTo(layers.customers);
   }
@@ -199,7 +199,7 @@ export function update(state, boundaryByName) {
   if (changed("flows", geo.flows)) {
   layers.flows.clearLayers();
   for (const f of geo.flows || []) {
-    L.polyline([f.from, f.via, f.to], { color: f.failing ? "#b3261e" : "#111111", weight: f.failing ? 2.2 : 1.3, opacity: 0.7, className: "flow-line" })
+    L.polyline([f.from, f.via, f.to], { color: f.failing ? "#ee6018" : "#eeeeee", weight: f.failing ? 2.2 : 1.3, opacity: 0.7, className: "flow-line" })
       .bindTooltip(`${f.city} → gateway → ${f.bank}${f.failing ? " · failing" : ""}`, { className: "tip", sticky: true }).addTo(layers.flows);
   }
   }

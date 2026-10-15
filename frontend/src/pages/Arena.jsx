@@ -64,7 +64,7 @@ export default function Arena() {
 
       <div className="referee">
         <AgentBadge agent="oracle" />
-        <p className="say" role="status" aria-live="polite" style={{ margin: 0 }}><span className="name">ORACLE</span><span className="muted"> · referee · </span>{oracle.speech}</p>
+        <p key={oracle.speech} className="say fade-in" role="status" aria-live="polite" style={{ margin: 0 }}><span className="name">ORACLE</span><span className="muted"> · referee · </span>{oracle.speech}</p>
         <span className="chip oracle">{agentState(oracle.mood)}</span>
       </div>
 

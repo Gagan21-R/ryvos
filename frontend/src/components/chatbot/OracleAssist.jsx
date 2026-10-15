@@ -1,5 +1,5 @@
 // ORACLE ASSIST: context-aware explainer. Knows the page, system and chart the user is looking at.
-import { MessageSquare, Send, X } from "lucide-react";
+import { Send, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { api } from "../../services/api.js";
 import { closeAssist, openAssist, useArena } from "../../state/arenaStore.js";
@@ -91,7 +91,7 @@ export default function OracleAssist({ page }) {
         </section>
       )}
       <button className="assist-btn" onClick={() => (assist.open ? closeAssist() : openAssist())} aria-label={assist.open ? "Close ORACLE ASSIST" : "Open ORACLE ASSIST"}>
-        {assist.open ? <X size={16} /> : <MessageSquare size={16} />}{assist.open ? "Close" : "Ask ORACLE"}
+        {assist.open ? <X size={16} /> : <span className="status-dot live" />}{assist.open ? "Close" : "Ask ORACLE"}
       </button>
     </>
   );

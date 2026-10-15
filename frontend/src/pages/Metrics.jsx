@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CountUp } from "../components/common/motion.jsx";
 import { SystemTabs } from "../components/common/ui.jsx";
 import { ChartCard, ComponentBars, ImpactChart, RecoveryBars, ResilienceChart, ResilienceGauge, TimesChart } from "../components/metrics/Charts.jsx";
 import { api } from "../services/api.js";
@@ -39,19 +40,19 @@ export default function Metrics() {
               </div>
             </div>
             <div className="kpis">
-              <div className="kpi"><span>MTTD</span><b>{m.mttd ?? "—"}<small> {m.unit}</small></b><small>first rounds: {m.mttd_first ?? "—"}</small></div>
-              <div className="kpi"><span>MTTR</span><b>{m.mttr ?? "—"}<small> {m.unit}</small></b><small>first rounds: {m.mttr_first ?? "—"}</small></div>
-              <div className="kpi"><span>Recovery success</span><b>{m.recovery_success}%</b><small>of detected incidents</small></div>
-              <div className="kpi"><span>Experiments</span><b>{m.experiments}</b><small>{m.rounds} rounds</small></div>
+              <div className="kpi"><span>MTTD</span><b><CountUp value={m.mttd} decimals={1} /><small> {m.unit}</small></b><small>first rounds: {m.mttd_first ?? "—"}</small></div>
+              <div className="kpi"><span>MTTR</span><b><CountUp value={m.mttr} decimals={1} /><small> {m.unit}</small></b><small>first rounds: {m.mttr_first ?? "—"}</small></div>
+              <div className="kpi"><span>Recovery success</span><b><CountUp value={m.recovery_success} />%</b><small>of detected incidents</small></div>
+              <div className="kpi"><span>Experiments</span><b><CountUp value={m.experiments} /></b><small>{m.rounds} rounds</small></div>
               <div className="kpi"><span>Failure modes tested</span><b>{m.modes_tested} / {m.modes_total}</b><small>{m.untested.length ? `untested: ${m.untested.length}` : "full coverage"}</small></div>
-              <div className="kpi"><span>Diagnosis accuracy</span><b>{m.oracle_accuracy ?? "—"}%</b><small>validated by ORACLE · AEGIS said {m.aegis_confidence ?? "—"}%</small></div>
+              <div className="kpi"><span>Diagnosis accuracy</span><b><CountUp value={m.oracle_accuracy} decimals={1} />%</b><small>validated by ORACLE · AEGIS said {m.aegis_confidence ?? "—"}%</small></div>
             </div>
           </div>
           <div className="charts2" style={{ marginTop: 16 }}>
             <ChartCard title="Resilience over rounds" hint="Running score vs each round's score" chart="resilience"><ResilienceChart series={m.series} /></ChartCard>
             <ChartCard title="MTTD and MTTR per round" hint={`Simulated ${m.unit}`} chart="mttd_mttr" question="What is the difference between MTTD and MTTR?"><TimesChart series={m.series} unit={m.unit} /></ChartCard>
-            <ChartCard title={`${m.headline_metric.label} per round`} hint="Red points: AEGIS switched off · dashed line: a normal day" chart="impact"><ImpactChart series={m.series} metric={m.headline_metric} baseline={D?.baseline} /></ChartCard>
-            <ChartCard title="Time incidents stayed open" hint="Blue: from playbook · grey: investigated · red: AEGIS off" chart="recovery"><RecoveryBars series={m.series} /></ChartCard>
+            <ChartCard title={`${m.headline_metric.label} per round`} hint="Orange points: AEGIS switched off · dashed line: a normal day" chart="impact"><ImpactChart series={m.series} metric={m.headline_metric} baseline={D?.baseline} /></ChartCard>
+            <ChartCard title="Time incidents stayed open" hint="Green: from playbook · grey: investigated · orange: AEGIS off" chart="recovery"><RecoveryBars series={m.series} /></ChartCard>
           </div>
         </>
       )}

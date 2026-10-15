@@ -5,8 +5,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   CartesianGrid, ComposedChart, Line, LineChart, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
+import { CountUp } from "../components/common/motion.jsx";
 import { SYSTEMS } from "../components/common/ui.jsx";
-import { C, axis, tip } from "../components/metrics/Charts.jsx";
+import { ANIM, C, axis, tip } from "../components/metrics/Charts.jsx";
 import { api } from "../services/api.js";
 import { toast } from "../state/arenaStore.js";
 
@@ -67,12 +68,12 @@ function SeriesChart({ data, cursor }) {
           <YAxis {...axis} width={56} domain={["auto", "auto"]} tickFormatter={(v) => (Math.abs(v) >= 1000 ? `${Math.round(v / 1000)}k` : Math.round(v * 10) / 10)} />
           <Tooltip {...tip} labelFormatter={(i) => nearest(i)} formatter={(v, n) => [v, n === "v" ? "Value" : n]} />
           {data.windows.map((w) => (
-            <ReferenceArea key={w.i} x1={w.i} x2={Math.min(w.j, Math.max(w.i, lastI))} fill={w.detected ? C.ok : C.bad} fillOpacity={0.1}
+            <ReferenceArea key={w.i} x1={w.i} x2={Math.min(w.j, Math.max(w.i, lastI))} fill={w.detected ? C.ok : C.bad} fillOpacity={0.14}
               stroke={w.detected ? C.ok : C.bad} strokeOpacity={0.35} ifOverflow="hidden" />
           ))}
           <Line dataKey="v" name="Value" stroke={C.ink} strokeWidth={1.1} dot={false} isAnimationActive={false} />
           {alerts.map((a) => (
-            <ReferenceDot key={a.i} x={a.i} y={a.v} r={a.true ? 5 : 4.5} fill={a.true ? C.ok : C.bad} stroke="#fff" strokeWidth={1.5} ifOverflow="extendDomain" />
+            <ReferenceDot key={a.i} x={a.i} y={a.v} r={a.true ? 5 : 4.5} fill={a.true ? C.ok : C.bad} stroke="#101010" strokeWidth={1.5} ifOverflow="extendDomain" />
           ))}
         </ComposedChart>
       </ResponsiveContainer>
@@ -90,9 +91,9 @@ function SweepChart({ sweep, trained }) {
           <YAxis {...axis} domain={[0, 100]} unit="%" />
           <Tooltip {...tip} />
           <ReferenceLine x={trained} stroke={C.accent} strokeDasharray="4 4" label={{ value: "learned", fill: C.accent, fontSize: 11.5, position: "top" }} />
-          <Line dataKey="recall" name="Recall" stroke={C.aegis} strokeWidth={1.8} dot={{ r: 2.5 }} isAnimationActive={false} />
-          <Line dataKey="precision" name="Precision" stroke={C.rogue} strokeWidth={1.8} dot={{ r: 2.5 }} isAnimationActive={false} />
-          <Line dataKey="f1" name="F1" stroke={C.accent} strokeWidth={2.4} dot={{ r: 3 }} isAnimationActive={false} />
+          <Line dataKey="recall" name="Recall" stroke={C.aegis} strokeWidth={1.6} dot={{ r: 2.5 }} {...ANIM} />
+          <Line dataKey="precision" name="Precision" stroke={C.rogue} strokeWidth={1.6} dot={{ r: 2.5 }} {...ANIM} />
+          <Line dataKey="f1" name="F1" stroke={C.ink} strokeWidth={2} dot={{ r: 3 }} {...ANIM} />
         </LineChart>
       </ResponsiveContainer>
     </div>
@@ -247,11 +248,11 @@ export default function RealData() {
                 combination of the settings and keeps the one with the best F1 on the train set.
               </p>
               <div className="params">
-                <div><span>History window</span><b>{p.window_h} h</b><small>untrained: {model.defaults.window_h} h</small></div>
-                <div><span>Threshold</span><b>{p.threshold}</b><small>untrained: {model.defaults.threshold}</small></div>
+                <div><span>History window</span><b><CountUp value={p.window_h} /> h</b><small>untrained: {model.defaults.window_h} h</small></div>
+                <div><span>Threshold</span><b><CountUp value={p.threshold} decimals={1} /></b><small>untrained: {model.defaults.threshold}</small></div>
                 <div><span>Points in a row</span><b>{p.persist}</b><small>untrained: {model.defaults.persist}</small></div>
                 <div><span>Smoothing (α)</span><b>{p.alpha}</b><small>untrained: {model.defaults.alpha}</small></div>
-                <div><span>Cool-down</span><b>{p.cooldown_h} h</b><small>untrained: {model.defaults.cooldown_h} h</small></div>
+                <div><span>Cool-down</span><b><CountUp value={p.cooldown_h} /> h</b><small>untrained: {model.defaults.cooldown_h} h</small></div>
               </div>
             </div>
           </div>
@@ -298,8 +299,8 @@ export default function RealData() {
                 <SeriesChart data={series} cursor={cursor} />
                 <div className="legend-row" style={{ marginTop: 10 }}>
                   <span><i style={{ background: C.ink, height: 2, verticalAlign: 3 }} />Real value</span>
-                  <span><i style={{ background: "#d7ecdf" }} />Labelled incident, caught</span>
-                  <span><i style={{ background: "#f6d9d6" }} />Labelled incident, missed</span>
+                  <span><i style={{ background: "rgba(160,202,146,.35)" }} />Labelled incident, caught</span>
+                  <span><i style={{ background: "rgba(238,96,24,.35)" }} />Labelled incident, missed</span>
                   <span><i style={{ background: C.ok, borderRadius: "50%" }} />Correct alert</span>
                   <span><i style={{ background: C.bad, borderRadius: "50%" }} />False alarm</span>
                   <span className="muted">Chart shows {series.points_shown.toLocaleString("en-IN")} of {series.points_total.toLocaleString("en-IN")} points (peaks and every alert kept)</span>

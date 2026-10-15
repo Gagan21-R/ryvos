@@ -6,14 +6,28 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-obsidian: #101010;
+  --color-carbon: #1d1a18;
+  --color-ash: #3d3a39;
+  --color-graphite: #4d4947;
+  --color-granite: #8a8380;
+  --color-stone: #b8b3b0;
+  --color-bone: #eeeeee;
+  --color-chalk: #fafafa;
+  --color-signal: #ee6018;
+  --color-metric: #a0ca92;
+
+  --radius-xs: 3px;
+  --radius-card: 10px;
+  --radius-panel: 20px;
 }
 
 @layer utilities {
-  .text-mega {
-    font-size: 21vw;
-    line-height: 0.75;
-    letter-spacing: -0.04em;
-  }
+  .text-mega { font-size: 21vw; line-height: 0.75; letter-spacing: -0.04em; }
+  .tracking-display { letter-spacing: -0.04em; }
+  .tracking-heading { letter-spacing: -0.031em; }
+  .tracking-caption { letter-spacing: -0.02em; }
 }

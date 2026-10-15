@@ -14,5 +14,5 @@ export default function ChapterVisualFor({ id, learn, data }) {
   } else {
     content = <SafetyVisual verdicts={learn.verdicts || []} />;
   }
-  return <SandTransition className="w-full h-full mix-blend-lighten">{content}</SandTransition>;
+  return <SandTransition className="w-full h-full">{content}</SandTransition>;
 }
