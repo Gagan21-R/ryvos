@@ -44,6 +44,15 @@ export default function App() {
   const page = usePage();
   const conn = useArena((s) => s.connection);
   const View = VIEWS[page];
+  if (page === "overview") {          // the landing page brings its own header and navigation
+    return (
+      <>
+        <Boundary page={page}><Overview /></Boundary>
+        <OracleAssist page={page} />
+        <Toasts />
+      </>
+    );
+  }
   return (
     <div className="app">
       <TopBar />

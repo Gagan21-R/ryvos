@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ProofPanel from "../components/common/ProofPanel.jsx";
 import { AgentBadge, SystemTabs } from "../components/common/ui.jsx";
 import { BeliefBars, ChartCard, ChoiceScatter } from "../components/metrics/Charts.jsx";
 import { useArena } from "../state/arenaStore.js";
@@ -38,6 +39,9 @@ export default function Learning() {
           </div>
         ))}
       </div>
+      <div className="section-head"><div><h2>Proof it learns</h2><p>AEGIS's first 10 rounds against its latest 10, per system (simulated).</p></div></div>
+      <ProofPanel />
+
       <div className="charts2" style={{ marginTop: 16 }}>
         <ChartCard title="ROGUE's current belief" hint="Learned expected damage per experiment (Q-value)" chart="rogue_belief"><BeliefBars q={brain.q} labels={D?.experiments} /></ChartCard>
         <ChartCard title="ROGUE's choices over time" hint="Larger point = more damage caused" chart="rogue_choices">{metrics ? <ChoiceScatter series={metrics.series} attacks={D?.experiments} /> : null}</ChartCard>

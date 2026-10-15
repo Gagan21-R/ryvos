@@ -4,8 +4,8 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 const COLORS = {
-  unit_free: "#1f5fc4", unit_busy: "#4b2bb3", unit_problem: "#b3261e", unit_reserve: "#8d8a9c",
-  site: "#17784b", site_bad: "#c27a12", demand: "#b4490f", demand_urgent: "#b3261e", hub: "#1c1836",
+  unit_free: "#555555", unit_busy: "#111111", unit_problem: "#b3261e", unit_reserve: "#8d8a9c",
+  site: "#17784b", site_bad: "#c27a12", demand: "#b4490f", demand_urgent: "#b3261e", hub: "#111111",
 };
 const SHAPE = { site: "sq", site_bad: "sq", hub: "sq" };
 const PULSE = new Set(["unit_problem", "site_bad", "demand_urgent"]);
@@ -79,12 +79,12 @@ export function setGeography(geo) {
   markers.clear();
   for (const f of geo.layers.boundaries) {
     const op = f.properties.role === "operational";
-    L.geoJSON(f, { style: { color: "#1c1836", weight: op ? 1.8 : 1, dashArray: op ? null : "4 6", fillColor: op ? "#4b2bb3" : "#1c1836", fillOpacity: op ? 0.04 : 0.015 } })
+    L.geoJSON(f, { style: { color: "#111111", weight: op ? 1.8 : 1, dashArray: op ? null : "4 6", fillColor: op ? "#111111" : "#111111", fillOpacity: op ? 0.04 : 0.015 } })
       .bindTooltip(`${f.properties.label} · ${f.properties.source}`, { className: "tip", sticky: true })
       .addTo(layers.boundaries);
   }
   for (const c of geo.layers.coverage) {
-    L.circle([c.lat, c.lon], { radius: c.radius_km * 1000, color: "#1f5fc4", weight: 1, opacity: 0.35, fillOpacity: 0.035, interactive: false })
+    L.circle([c.lat, c.lon], { radius: c.radius_km * 1000, color: "#555555", weight: 1, opacity: 0.35, fillOpacity: 0.035, interactive: false })
       .addTo(layers.coverage);
   }
   for (const z of geo.layers.zones) {
@@ -199,7 +199,7 @@ export function update(state, boundaryByName) {
   if (changed("flows", geo.flows)) {
   layers.flows.clearLayers();
   for (const f of geo.flows || []) {
-    L.polyline([f.from, f.via, f.to], { color: f.failing ? "#b3261e" : "#4b2bb3", weight: f.failing ? 2.2 : 1.3, opacity: 0.7, className: "flow-line" })
+    L.polyline([f.from, f.via, f.to], { color: f.failing ? "#b3261e" : "#111111", weight: f.failing ? 2.2 : 1.3, opacity: 0.7, className: "flow-line" })
       .bindTooltip(`${f.city} → gateway → ${f.bank}${f.failing ? " · failing" : ""}`, { className: "tip", sticky: true }).addTo(layers.flows);
   }
   }

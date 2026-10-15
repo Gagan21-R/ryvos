@@ -6,8 +6,8 @@ import {
 } from "recharts";
 import { openAssist } from "../../state/arenaStore.js";
 
-export const C = { ink: "#1c1836", accent: "#4b2bb3", accentLight: "#a796e3", aegis: "#1f5fc4", rogue: "#b4490f", ok: "#17784b",
-  warn: "#9a5b06", bad: "#b3261e", muted: "#6c6981", grid: "#ecebf0", line: "#cbc8d6" };
+export const C = { ink: "#111111", accent: "#111111", accentLight: "#b5b5b5", aegis: "#111111", rogue: "#8a8a8a", ok: "#15803d",
+  warn: "#a16207", bad: "#b91c1c", muted: "#6b6b6b", grid: "#eeeeee", line: "#d1d1d1" };
 const INK = C.ink, GRID = C.grid, MUTED = C.muted;
 export const axis = { stroke: MUTED, fontSize: 11.5, tickLine: false, axisLine: { stroke: C.line } };
 export const tip = { contentStyle: { background: "#fff", border: `1px solid ${C.line}`, borderRadius: 4, color: INK, fontSize: 12.5, boxShadow: "0 4px 14px rgba(28,24,54,.12)" },
@@ -35,8 +35,8 @@ export function ResilienceGauge({ value, prev, size = 170 }) {
       <circle cx="90" cy="90" r={r} fill="none" stroke={C.grid} strokeWidth="12" />
       <circle cx="90" cy="90" r={r} fill="none" stroke={color} strokeWidth="12" transform="rotate(-90 90 90)"
         strokeDasharray={c} strokeDashoffset={c * (1 - v / 100)} />
-      <text x="90" y="98" textAnchor="middle" fontFamily="IBM Plex Sans" fontWeight="600" fontSize="44" fill={INK}>{value ?? "—"}</text>
-      <text x="90" y="122" textAnchor="middle" fontFamily="IBM Plex Sans" fontSize="12.5" fill={MUTED}>of 100{prev != null ? ` · was ${prev}` : ""}</text>
+      <text x="90" y="98" textAnchor="middle" fontFamily="Inter" fontWeight="600" fontSize="44" fill={INK}>{value ?? "—"}</text>
+      <text x="90" y="122" textAnchor="middle" fontFamily="Inter" fontSize="12.5" fill={MUTED}>of 100{prev != null ? ` · was ${prev}` : ""}</text>
     </svg>
   );
 }

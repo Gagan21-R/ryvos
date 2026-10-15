@@ -3,7 +3,7 @@ const STATUS = {
   healthy: { fill: "#ffffff", stroke: "#cbc8d6", text: "#17784b", label: "Healthy" },
   strained: { fill: "#faf0dc", stroke: "#d9a64a", text: "#9a5b06", label: "Strained" },
   degraded: { fill: "#fbeae9", stroke: "#b3261e", text: "#b3261e", label: "Degraded" },
-  mitigated: { fill: "#e9f0fb", stroke: "#1f5fc4", text: "#1f5fc4", label: "Recovered" },
+  mitigated: { fill: "#f2f2f2", stroke: "#111111", text: "#111111", label: "Recovered" },
 };
 
 function layout(nodes, edges) {
@@ -45,9 +45,9 @@ export default function SystemTopology({ topology, highlight = [] }) {
           <g key={n.id}>
             <title>{`${n.name}: ${st.label}. ${n.metric}. ${n.latency_ms} ms, ${n.error_pct}% errors (prototype telemetry)`}</title>
             <rect x={p.x} y={p.y} width={p.w} height={p.h} rx="6" fill={st.fill} stroke={st.stroke} strokeWidth={focus ? 2.5 : 1.2} />
-            <text x={p.x + 12} y={p.y + 22} fontSize="14.5" fontWeight="600" fill="#1c1836">{n.name}</text>
+            <text x={p.x + 12} y={p.y + 22} fontSize="14.5" fontWeight="600" fill="#111111">{n.name}</text>
             <text x={p.x + p.w - 10} y={p.y + 22} fontSize="11.5" fontWeight="600" fill={st.text} textAnchor="end">{st.label}</text>
-            <text x={p.x + 12} y={p.y + 43} fontSize="12" fill="#45425a" fontFamily="IBM Plex Mono">{n.latency_ms} ms · {n.error_pct}% err</text>
+            <text x={p.x + 12} y={p.y + 43} fontSize="12" fill="#45425a" fontFamily="JetBrains Mono">{n.latency_ms} ms · {n.error_pct}% err</text>
             <text x={p.x + 12} y={p.y + 61} fontSize="11.5" fill="#6c6981">{n.metric}</text>
           </g>
         );
