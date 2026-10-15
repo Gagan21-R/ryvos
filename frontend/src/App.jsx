@@ -1,7 +1,9 @@
 import { Component, useEffect, useRef, useState } from "react";
 import OracleAssist from "./components/chatbot/OracleAssist.jsx";
 import { PAGES, SideNav, Toasts, TopBar } from "./components/common/Layout.jsx";
-import { TelemetryStrip, useAutoReveal } from "./components/common/motion.jsx";
+import { TelemetryStrip, useAutoReveal, useSpotlight } from "./components/common/motion.jsx";
+import { syncChartPalette } from "./components/metrics/Charts.jsx";
+import PageScene from "./components/three/PageScene.jsx";
 import Agents from "./pages/Agents.jsx";
 import Arena from "./pages/Arena.jsx";
 import Incidents from "./pages/Incidents.jsx";
@@ -13,6 +15,7 @@ import RealData from "./pages/RealData.jsx";
 import Safety from "./pages/Safety.jsx";
 import Scenarios from "./pages/Scenarios.jsx";
 import { useArena } from "./state/arenaStore.js";
+import { useTheme } from "./state/theme.js";
 
 const VIEWS = { overview: Overview, arena: Arena, map: MapPage, scenarios: Scenarios, agents: Agents,
   incidents: Incidents, metrics: Metrics, learning: Learning, realdata: RealData, safety: Safety };
@@ -45,12 +48,15 @@ export default function App() {
   const page = usePage();
   const conn = useArena((s) => s.connection);
   const View = VIEWS[page];
+  const theme = useTheme();
+  syncChartPalette();                 // charts read the palette while rendering below
   const mainRef = useRef(null);
-  useAutoReveal(mainRef, page);
+  useAutoReveal(mainRef, `${page}:${theme}`);
+  useSpotlight();
   if (page === "overview") {          // the landing page brings its own header and navigation
     return (
       <>
-        <Boundary page={page}><Overview /></Boundary>
+        <Boundary page={page}><Overview key={theme} /></Boundary>
         <OracleAssist page={page} />
         <Toasts />
       </>
@@ -64,7 +70,8 @@ export default function App() {
         {conn === "down" && <div className="banner">Backend unavailable, retrying. Start everything with <code className="mono">python run_all.py</code>.</div>}
         {conn === "idle" && <div className="banner info">No live updates for a few seconds: the arena may be stopped or between rounds.</div>}
         <TelemetryStrip />
-        <Boundary page={page}><View key={page} /></Boundary>
+        <Boundary page={page}><View key={`${page}:${theme}`} /></Boundary>
+        <PageScene key={`3d:${page}:${theme}`} page={page} />
       </main>
       <OracleAssist page={page} />
       <Toasts />

@@ -1,5 +1,6 @@
 // Factory-style product window for the hero: traffic-light chrome, a mono title bar with a live status dot and
 // metric tiles with sparklines drawn from real arena results and the real-data model.
+import { palette } from "../../state/theme.js";
 import { CountUp } from "../common/motion.jsx";
 
 function Spark({ values, color }) {
@@ -28,13 +29,14 @@ function Tile({ label, value, decimals = 0, unit, note, values, color }) {
 }
 
 export default function DashboardFrame({ system, round, phase, results, model }) {
+  const P = palette();
   const last = results.slice(-40);
   const latest = last[last.length - 1];
   const unitMin = latest && latest.mttr_sec != null && latest.domain !== "upi";
   const mttr = (r) => (r.mttr_sec == null ? null : unitMin ? r.mttr_sec / 60 : r.mttr_sec);
   const mttrs = last.map(mttr).filter((v) => v != null);
   return (
-    <div className="rounded-card border border-carbon bg-[#0d0d0d] overflow-hidden" style={{ animation: "frameIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.5s both" }}>
+    <div className="rounded-card border border-carbon bg-surface overflow-hidden" style={{ animation: "frameIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.5s both" }}>
       <div className="flex items-center gap-3 px-4 h-10 border-b border-carbon">
         <span className="flex gap-1.5" aria-hidden="true">
           <i className="w-2.5 h-2.5 rounded-full bg-ash block" /><i className="w-2.5 h-2.5 rounded-full bg-ash block" /><i className="w-2.5 h-2.5 rounded-full bg-ash block" />
@@ -45,10 +47,10 @@ export default function DashboardFrame({ system, round, phase, results, model })
         </span>
       </div>
       <div className="grid grid-cols-2 -mr-px -mb-px">
-        <Tile label="Resilience" value={latest?.resilience} unit="/100" note={`${system || "—"} · running score`} values={last.map((r) => r.resilience)} color="#a0ca92" />
-        <Tile label="MTTR" value={mttrs[mttrs.length - 1]} decimals={unitMin ? 0 : 0} unit={unitMin ? "min" : "s"} note="time incidents stayed open (sim)" values={mttrs} color="#ee6018" />
-        <Tile label="Real-data F1" value={model?.test?.trained?.f1} decimals={1} note={model ? `untrained rule: ${model.test.untrained.f1}` : "loading"} values={null} color="#a0ca92" />
-        <Tile label="Failure damage" value={latest ? Math.round(latest.red_reward * 100) : null} unit="%" note="ROGUE's last experiment" values={last.map((r) => r.red_reward * 100)} color="#ee6018" />
+        <Tile label="Resilience" value={latest?.resilience} unit="/100" note={`${system || "—"} · running score`} values={last.map((r) => r.resilience)} color={P.ok} />
+        <Tile label="MTTR" value={mttrs[mttrs.length - 1]} decimals={unitMin ? 0 : 0} unit={unitMin ? "min" : "s"} note="time incidents stayed open (sim)" values={mttrs} color={P.bad} />
+        <Tile label="Real-data F1" value={model?.test?.trained?.f1} decimals={1} note={model ? `untrained rule: ${model.test.untrained.f1}` : "loading"} values={null} color={P.ok} />
+        <Tile label="Failure damage" value={latest ? Math.round(latest.red_reward * 100) : null} unit="%" note="ROGUE's last experiment" values={last.map((r) => r.red_reward * 100)} color={P.bad} />
       </div>
     </div>
   );

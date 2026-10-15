@@ -9,20 +9,26 @@
   --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-obsidian: #101010;
-  --color-carbon: #1d1a18;
-  --color-ash: #3d3a39;
-  --color-graphite: #4d4947;
-  --color-granite: #8a8380;
-  --color-stone: #b8b3b0;
-  --color-bone: #eeeeee;
-  --color-chalk: #fafafa;
-  --color-signal: #ee6018;
-  --color-metric: #a0ca92;
 
   --radius-xs: 3px;
   --radius-card: 10px;
   --radius-panel: 20px;
+}
+
+/* Colour names map to the live theme variables, so light / dark switches the whole landing page too. */
+@theme inline {
+  --color-obsidian: var(--bg);
+  --color-surface: var(--surface);
+  --color-carbon: var(--surface-2);
+  --color-hair: var(--line);
+  --color-ash: var(--line-strong);
+  --color-graphite: var(--graphite);
+  --color-granite: var(--muted);
+  --color-stone: var(--ink-2);
+  --color-bone: var(--ink);
+  --color-chalk: var(--chalk);
+  --color-signal: var(--bad);
+  --color-metric: var(--ok);
 }
 
 @layer utilities {

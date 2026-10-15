@@ -2,14 +2,17 @@
 // All geography comes from the backend: static layers via /api/geography, dynamic layers via city.state.
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { palette } from "../../state/theme.js";
 
-const COLORS = {
-  unit_free: "#eeeeee", unit_busy: "#eeeeee", unit_problem: "#ee6018", unit_reserve: "#8a8380",
-  site: "#a0ca92", site_bad: "#c9a27e", demand: "#ee6018", demand_urgent: "#ee6018", hub: "#eeeeee",
+const P = () => palette();
+const colors = () => {
+  const p = P();
+  return { unit_free: p.ink, unit_busy: p.ink2, unit_problem: p.bad, unit_reserve: p.muted,
+    site: p.ok, site_bad: p.warn, demand: p.bad, demand_urgent: p.bad, hub: p.ink };
 };
 const SHAPE = { site: "sq", site_bad: "sq", hub: "sq" };
 const PULSE = new Set(["unit_problem", "site_bad", "demand_urgent"]);
-export const LEGEND_COLORS = COLORS;
+export const LEGEND_COLORS = new Proxy({}, { get: (_, k) => colors()[k] });
 
 let map = null;
 let el = null;
@@ -79,16 +82,16 @@ export function setGeography(geo) {
   markers.clear();
   for (const f of geo.layers.boundaries) {
     const op = f.properties.role === "operational";
-    L.geoJSON(f, { style: { color: "#eeeeee", weight: op ? 1.8 : 1, dashArray: op ? null : "4 6", fillColor: op ? "#eeeeee" : "#eeeeee", fillOpacity: op ? 0.04 : 0.015 } })
+    L.geoJSON(f, { style: { color: P().ink, weight: op ? 1.8 : 1, dashArray: op ? null : "4 6", fillColor: op ? P().ink : P().ink, fillOpacity: op ? 0.04 : 0.015 } })
       .bindTooltip(`${f.properties.label} · ${f.properties.source}`, { className: "tip", sticky: true })
       .addTo(layers.boundaries);
   }
   for (const c of geo.layers.coverage) {
-    L.circle([c.lat, c.lon], { radius: c.radius_km * 1000, color: "#eeeeee", weight: 1, opacity: 0.35, fillOpacity: 0.035, interactive: false })
+    L.circle([c.lat, c.lon], { radius: c.radius_km * 1000, color: P().ink, weight: 1, opacity: 0.35, fillOpacity: 0.035, interactive: false })
       .addTo(layers.coverage);
   }
   for (const z of geo.layers.zones) {
-    L.polygon(z.polygon, { color: "#a0ca92", weight: 1.4, dashArray: "5 5", fillColor: "#a0ca92", fillOpacity: 0.07 })
+    L.polygon(z.polygon, { color: P().ok, weight: 1.4, dashArray: "5 5", fillColor: P().ok, fillOpacity: 0.07 })
       .bindTooltip(z.label, { className: "tip", sticky: true }).addTo(layers.zones);
     const c = z.polygon.reduce((a, p) => [a[0] + p[0] / z.polygon.length, a[1] + p[1] / z.polygon.length], [0, 0]);
     L.marker(c, { interactive: false, icon: L.divIcon({ className: "zone-label", html: z.name, iconSize: [110, 12], iconAnchor: [55, 6] }) }).addTo(layers.labels);
@@ -99,7 +102,7 @@ export function setGeography(geo) {
 function markerIcon(p) {
   const s = Math.max(9, Math.round((p.size || 9) * 1.05));
   return L.divIcon({ className: "mk-wrap", iconSize: [s, s], iconAnchor: [s / 2, s / 2],
-    html: `<div class="mk ${SHAPE[p.group] || ""} ${PULSE.has(p.group) ? "pulse" : ""}" style="--s:${s}px;--c:${COLORS[p.group] || "#888"}"></div>` });
+    html: `<div class="mk ${SHAPE[p.group] || ""} ${PULSE.has(p.group) ? "pulse" : ""}" style="--s:${s}px;--c:${colors()[p.group] || P().muted}"></div>` });
 }
 
 const SVG = (paths) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
@@ -147,7 +150,7 @@ export function update(state, boundaryByName) {
   layers.incident.clearLayers();
   if (inc) {
     if (inc.route?.length > 1) {
-      L.polyline(inc.route, { color: "#ee6018", weight: 3, opacity: 0.85, className: "route-line" })
+      L.polyline(inc.route, { color: P().bad, weight: 3, opacity: 0.85, className: "route-line" })
         .bindTooltip(`Simulated response route (straight-line) · ETA ~${inc.eta_min ?? "?"} min`, { className: "tip", sticky: true })
         .addTo(layers.incident);
     }
@@ -157,7 +160,7 @@ export function update(state, boundaryByName) {
     L.marker([inc.hospital.lat, inc.hospital.lon], { icon: big(ICONS.hospital), zIndexOffset: 800 }).bindTooltip(`${inc.hospital.label} · ${inc.hospital.free_beds} beds free`, { className: "tip" }).addTo(layers.incident);
   }
   for (const g of geo.ghosts || []) {
-    L.circleMarker([g.lat, g.lon], { radius: 6, color: "#ee6018", weight: 1.5, dashArray: "2 3", fillOpacity: 0 })
+    L.circleMarker([g.lat, g.lon], { radius: 6, color: P().bad, weight: 1.5, dashArray: "2 3", fillOpacity: 0 })
       .bindTooltip(`${g.id}: frozen GPS position (what dispatch believes)`, { className: "tip" }).addTo(layers.incident);
   }
   }
@@ -167,10 +170,10 @@ export function update(state, boundaryByName) {
   layers.affected.clearLayers();
   for (const a of geo.affected || []) {
     if (a.type === "circle") {
-      L.circle([a.lat, a.lon], { radius: a.radius_km * 1000, color: "#ee6018", weight: 1.6, fillColor: "#ee6018", fillOpacity: 0.1, className: "route-line" })
+      L.circle([a.lat, a.lon], { radius: a.radius_km * 1000, color: P().bad, weight: 1.6, fillColor: P().bad, fillOpacity: 0.1, className: "route-line" })
         .bindTooltip(a.label, { className: "tip" }).addTo(layers.affected);
     } else if (a.type === "region" && boundaryByName?.[a.name]) {
-      L.geoJSON(boundaryByName[a.name], { style: { color: "#ee6018", weight: 2, fillColor: "#ee6018", fillOpacity: 0.1 } })
+      L.geoJSON(boundaryByName[a.name], { style: { color: P().bad, weight: 2, fillColor: P().bad, fillOpacity: 0.1 } })
         .bindTooltip(a.label, { className: "tip", sticky: true }).addTo(layers.affected);
     }
   }
@@ -181,15 +184,15 @@ export function update(state, boundaryByName) {
   layers.customers.clearLayers();
   for (const z of geo.zones || []) {
     if (z.configured) {
-      L.polygon(z.configured, { color: z.status === "restored" ? "#a0ca92" : "#ee6018", weight: 2, fillOpacity: 0.1,
-        fillColor: z.status === "restored" ? "#a0ca92" : "#ee6018" })
+      L.polygon(z.configured, { color: z.status === "restored" ? P().ok : P().bad, weight: 2, fillOpacity: 0.1,
+        fillColor: z.status === "restored" ? P().ok : P().bad })
         .bindTooltip(`${z.name}: configured free-delivery boundary (${z.status})`, { className: "tip", sticky: true }).addTo(layers.customers);
     }
   }
   for (const c of geo.customers || []) {
     const wrong = c.truly_free && !c.free;
-    L.circleMarker([c.lat, c.lon], { radius: wrong ? 5 : 3.5, weight: wrong ? 2 : 1, color: wrong ? "#ee6018" : c.free ? "#a0ca92" : "#8a8380",
-      fillColor: wrong ? "#ee6018" : c.free ? "#a0ca92" : "#8a8380", fillOpacity: 0.8 })
+    L.circleMarker([c.lat, c.lon], { radius: wrong ? 5 : 3.5, weight: wrong ? 2 : 1, color: wrong ? P().bad : c.free ? P().ok : P().muted,
+      fillColor: wrong ? P().bad : c.free ? P().ok : P().muted, fillOpacity: 0.8 })
       .bindTooltip(wrong ? "Inside the service area but shown a delivery fee" : c.free ? "Free delivery" : "Outside free-delivery zone", { className: "tip" })
       .addTo(layers.customers);
   }
@@ -199,7 +202,7 @@ export function update(state, boundaryByName) {
   if (changed("flows", geo.flows)) {
   layers.flows.clearLayers();
   for (const f of geo.flows || []) {
-    L.polyline([f.from, f.via, f.to], { color: f.failing ? "#ee6018" : "#eeeeee", weight: f.failing ? 2.2 : 1.3, opacity: 0.7, className: "flow-line" })
+    L.polyline([f.from, f.via, f.to], { color: f.failing ? P().bad : P().ink, weight: f.failing ? 2.2 : 1.3, opacity: 0.7, className: "flow-line" })
       .bindTooltip(`${f.city} → gateway → ${f.bank}${f.failing ? " · failing" : ""}`, { className: "tip", sticky: true }).addTo(layers.flows);
   }
   }

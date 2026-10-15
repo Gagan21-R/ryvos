@@ -9,8 +9,23 @@ import { useArena } from "../../state/arenaStore.js";
 import { useStory } from "../../story/director.js";
 import { systemById } from "./ui.jsx";
 
-const REVEAL = [".card", ".panel", ".learn-card", ".scenario", ".report", ".kpis", ".final-verdict", ".agent-card", ".referee",
-  ".map-shell", ".stat-strip > *", ".live-grid > *", ".params", ".section-head", ".empty", ".hier"].join(",");
+const SPOT = [".card", ".panel", ".learn-card", ".scenario", ".report", ".kpis", ".final-verdict", ".agent-card", ".referee"].join(",");
+const REVEAL = [SPOT, ".map-shell", ".stat-strip > *", ".live-grid > *", ".params", ".section-head", ".empty", ".hier"].join(",");
+
+// Cards light up under the pointer: a soft spotlight plus a glowing border that follows the mouse.
+export function useSpotlight() {
+  useEffect(() => {
+    const onMove = (e) => {
+      const el = e.target.closest?.("[data-spot]");
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      el.style.setProperty("--my", `${e.clientY - r.top}px`);
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => window.removeEventListener("pointermove", onMove);
+  }, []);
+}
 
 export function useAutoReveal(rootRef, key) {
   useEffect(() => {
@@ -30,6 +45,7 @@ export function useAutoReveal(rootRef, key) {
       });
     }, { rootMargin: "0px 0px -6% 0px", threshold: 0.05 });
     const watch = (el) => {
+      if (el.matches(SPOT)) el.dataset.spot = "1";
       el.dataset.reveal = "out";
       io.observe(el);
       // safety net: anything on screen that the observer has not reported within 1.5 s is shown anyway

@@ -3,13 +3,14 @@
 // window with live metrics, the RYVO loop ring, auto-cycling chapters and a bone CTA card.
 import { ArrowRight, ArrowUpRight, BookOpen, Brain, Database, FlaskConical, Scale, Shield, ShieldCheck, Swords } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
-import { PAGES } from "../components/common/Layout.jsx";
+import { useEffect, useMemo, useState } from "react";
+import { PAGES, ThemeButton } from "../components/common/Layout.jsx";
 import { systemById } from "../components/common/ui.jsx";
 import ChapterVisualFor from "../components/landing/Chapters.jsx";
 import DashboardFrame from "../components/landing/DashboardFrame.jsx";
 import LoopRing from "../components/landing/LoopRing.jsx";
-import NetworkField from "../components/landing/NetworkField.jsx";
+import Scene3D from "../components/three/Scene3D.jsx";
+import { globe } from "../components/three/scenes.js";
 import Wordmark, { EASE } from "../components/landing/Wordmark.jsx";
 import { api } from "../services/api.js";
 import { useArena } from "../state/arenaStore.js";
@@ -50,12 +51,30 @@ function useLanding() {
   return { model, series, proof };
 }
 
+function IncidentTag({ incident, experiments }) {
+  const name = experiments.length ? experiments[incident.exp % experiments.length] : "Latency injection";
+  const tag = `EXP ${String(incident.exp).padStart(3, "0")}`;
+  const line = {
+    steady: ["All services healthy", "text-granite"],
+    inject: [`${tag} · ROGUE · Injecting: ${name}`, "text-signal"],
+    detect: [`${tag} · AEGIS · Anomaly detected`, "text-bone"],
+    recover: [`${tag} · AEGIS · Recovered · MTTR ${(2.4 + (incident.exp % 5) * 0.4).toFixed(1)} s`, "text-metric"],
+  }[incident.ph];
+  return (
+    <div className="absolute left-1/2 -translate-x-1/2 bottom-[9%] flex items-center gap-2 px-3 h-8 rounded-xs border border-ash bg-obsidian/80 backdrop-blur-sm font-mono text-[11px] uppercase tracking-caption whitespace-nowrap">
+      <span className={`status-dot ${incident.ph === "recover" ? "ok" : incident.ph === "steady" ? "idle" : "live"}`} />
+      <span key={incident.ph + incident.exp} className={`fade-in ${line[1]}`}>{line[0]}</span>
+    </div>
+  );
+}
+
 const Label = ({ children, className = "" }) => (
   <div className={`font-mono text-[12px] uppercase tracking-caption text-stone ${className}`}>{children}</div>
 );
 
 export default function Overview() {
-  const [showField, setShowField] = useState(false);
+  const [incident, setIncident] = useState({ ph: "steady", exp: 14 });
+  const globeBuild = useMemo(() => globe({ onEvent: (ph, exp) => setIncident({ ph, exp }) }), []);
   const [active, setActive] = useState(0);
   const [hold, setHold] = useState(false);
   const [menu, setMenu] = useState(false);
@@ -71,7 +90,6 @@ export default function Overview() {
   const go = (h) => { window.location.hash = h; };
   const start = async () => { await startRound(s?.domain || "emergency"); go("#/arena"); };
 
-  useEffect(() => { const t = setTimeout(() => setShowField(true), 1400); return () => clearTimeout(t); }, []);
   useEffect(() => {
     if (hold) return undefined;
     const t = setInterval(() => setActive((a) => (a + 1) % CHAPTERS.length), 3500);
@@ -82,13 +100,10 @@ export default function Overview() {
     <div className="bg-obsidian text-bone font-sans overflow-x-hidden min-h-screen">
       {/* ============================================================ 1 · HERO */}
       <section className="relative w-full min-h-screen flex flex-col overflow-hidden">
-        <AnimatePresence>
-          {showField && (
-            <motion.div className="absolute inset-0 pointer-events-none z-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.6 }}>
-              <NetworkField experiments={experiments} className="w-full h-full block" />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div className="absolute z-0 pointer-events-none hidden md:block left-[16%] right-[18%] top-[12%] bottom-0" style={{ animation: "fade 2s cubic-bezier(0.16,1,0.3,1) 0.8s both" }}>
+          <Scene3D build={globeBuild} className="w-full h-full" label="3D globe of connected services: ROGUE injects a failure, AEGIS detects and recovers it" />
+          <IncidentTag incident={incident} experiments={experiments} />
+        </div>
 
         <motion.header className="relative pt-6 px-6 md:px-16 z-20" initial="initial" animate="animate" variants={{ animate: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } } }}>
           <Wordmark />
@@ -104,6 +119,7 @@ export default function Overview() {
             <nav className="hidden md:flex md:w-[15%] flex-col gap-1.5" aria-label="Main">
               {NAV.map(([l, h]) => <a key={l} href={h} className="text-bone no-underline transition-colors duration-200 hover:text-signal">{l}</a>)}
             </nav>
+            <ThemeButton className="hidden md:grid place-items-center w-9 h-9 rounded-xs border border-ash bg-transparent text-bone cursor-pointer transition-colors duration-200 hover:border-bone mr-4" />
             <button onClick={() => setMenu((m) => !m)} aria-label={menu ? "Close menu" : "Open menu"} aria-expanded={menu}
               className="group relative z-[60] flex flex-col gap-[6px] items-end bg-transparent border-0 p-2 -mr-2 cursor-pointer">
               <span className={`block h-[1.5px] bg-bone transition-all duration-300 ${menu ? "w-8 rotate-45 translate-y-[3.75px]" : "w-8 group-hover:w-6"}`} />

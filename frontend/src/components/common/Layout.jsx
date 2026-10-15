@@ -1,7 +1,8 @@
 // Top bar, side navigation and toasts.
-import { Activity, AlertTriangle, BookOpen, Bot, Brain, Database, Gauge, LayoutDashboard, Map, Pause, Play, Shield, Swords } from "lucide-react";
+import { Activity, AlertTriangle, BookOpen, Bot, Brain, Database, Gauge, LayoutDashboard, Map, Moon, Pause, Play, Shield, Sun, Swords } from "lucide-react";
 import { api } from "../../services/api.js";
 import { act, useArena } from "../../state/arenaStore.js";
+import { toggleTheme, useTheme } from "../../state/theme.js";
 import { ROTATE, SYSTEMS } from "./ui.jsx";
 
 export const PAGES = [
@@ -33,12 +34,10 @@ export function TopBar() {
   const mode = st.domain_mode || live?.state?.domain;
   return (
     <header className="topbar">
-      <a className="wordmark" href="#/overview" aria-label="RYVO home">
-        <img src="/favicon.svg" alt="" />RYVO<small>Resilience testing</small>
-      </a>
-      <span className={`pill ${conn === "live" ? "" : "warn"}`}><span className="led" />{conn === "live" ? "Sandbox connected" : conn === "down" ? "Backend offline" : "Connecting"}</span>
+      <a className="wordmark" href="#/overview" aria-label="RYVO home">RYVO<small>Resilience testing</small></a>
+      <span className={`pill ${conn === "live" ? "" : "warn"}`}>{conn === "live" ? "Sandbox connected" : conn === "down" ? "Backend offline" : "Connecting"}</span>
       <span className="pill hide-sm">Round <b className="mono">{live?.state?.round ?? "—"}</b></span>
-      <span className={`pill ${tone} hide-sm`} aria-live="polite"><span className="led" />{label}</span>
+      <span className={`pill ${tone} hide-sm`} aria-live="polite">{label}</span>
       <div className="top-spacer" />
       <div className="segmented" role="group" aria-label="System under test">
         {[...SYSTEMS, ROTATE].map(({ id, short, icon: Icon }) => {
@@ -58,11 +57,21 @@ export function TopBar() {
           st.blue_enabled === false ? "AEGIS is back online" : "AEGIS switched off")}>
         <Shield size={16} />
       </button>
+      <ThemeButton />
       <button className="icon-btn" aria-label={st.paused ? "Resume simulation" : "Pause simulation"} title={st.paused ? "Resume" : "Pause"}
         onClick={() => act("pause", () => api.control({ cmd: st.paused ? "resume" : "pause" }))}>
         {st.paused ? <Play size={16} /> : <Pause size={16} />}
       </button>
     </header>
+  );
+}
+
+export function ThemeButton({ className = "icon-btn theme-btn" }) {
+  const theme = useTheme();
+  return (
+    <button className={className} onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} title={theme === "dark" ? "Light mode" : "Dark mode"}>
+      {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+    </button>
   );
 }
 

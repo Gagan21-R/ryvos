@@ -1,9 +1,13 @@
+import { palette } from "../../state/theme.js";
 // Live service graph. Nodes are laid out by dependency depth; status is shown with text, not colour alone.
-const STATUS = {
-  healthy: { fill: "#141312", stroke: "#3d3a39", text: "#a0ca92", label: "Healthy" },
-  strained: { fill: "rgba(201,162,126,.08)", stroke: "#c9a27e", text: "#c9a27e", label: "Strained" },
-  degraded: { fill: "rgba(238,96,24,.1)", stroke: "#ee6018", text: "#ee6018", label: "Degraded" },
-  mitigated: { fill: "rgba(160,202,146,.08)", stroke: "#a0ca92", text: "#a0ca92", label: "Recovered" },
+const statusStyle = () => {
+  const p = palette();
+  return {
+    healthy: { fill: p.surface, stroke: p.lineStrong, text: p.ok, label: "Healthy" },
+    strained: { fill: p.surface, stroke: p.warn, text: p.warn, label: "Strained" },
+    degraded: { fill: p.surface2, stroke: p.bad, text: p.bad, label: "Degraded" },
+    mitigated: { fill: p.surface, stroke: p.ok, text: p.ok, label: "Recovered" },
+  };
 };
 
 function layout(nodes, edges) {
@@ -29,6 +33,8 @@ export default function SystemTopology({ topology, highlight = [] }) {
   const { nodes, edges } = topology;
   const { pos, W, H } = layout(nodes, edges);
   const status = Object.fromEntries(nodes.map((n) => [n.id, n.status]));
+  const STATUS = statusStyle();
+  const P = palette();
   return (
     <svg className="topo" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Live service topology">
       {edges.map(([a, b]) => {
@@ -45,10 +51,10 @@ export default function SystemTopology({ topology, highlight = [] }) {
           <g key={n.id}>
             <title>{`${n.name}: ${st.label}. ${n.metric}. ${n.latency_ms} ms, ${n.error_pct}% errors (prototype telemetry)`}</title>
             <rect className={`node-rect ${n.status}`} x={p.x} y={p.y} width={p.w} height={p.h} rx="6" fill={st.fill} stroke={st.stroke} strokeWidth={focus ? 2 : 1} />
-            <text x={p.x + 12} y={p.y + 22} fontSize="15" fontWeight="400" fill="#eeeeee">{n.name}</text>
+            <text x={p.x + 12} y={p.y + 22} fontSize="15" fontWeight="400" fill={P.ink}>{n.name}</text>
             <text x={p.x + p.w - 10} y={p.y + 22} fontSize="11" fill={st.text} textAnchor="end" fontFamily="Geist Mono" letterSpacing="-0.2">{st.label}</text>
-            <text x={p.x + 12} y={p.y + 43} fontSize="12" fill="#b8b3b0" fontFamily="Geist Mono">{n.latency_ms} ms · {n.error_pct}% err</text>
-            <text x={p.x + 12} y={p.y + 61} fontSize="12" fill="#8a8380">{n.metric}</text>
+            <text x={p.x + 12} y={p.y + 43} fontSize="12" fill={P.ink2} fontFamily="Geist Mono">{n.latency_ms} ms · {n.error_pct}% err</text>
+            <text x={p.x + 12} y={p.y + 61} fontSize="12" fill={P.muted}>{n.metric}</text>
           </g>
         );
       })}

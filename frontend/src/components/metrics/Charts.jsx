@@ -5,9 +5,19 @@ import {
   Tooltip, XAxis, YAxis, ZAxis,
 } from "recharts";
 import { openAssist } from "../../state/arenaStore.js";
+import { palette } from "../../state/theme.js";
 
 export const C = { ink: "#eeeeee", accent: "#eeeeee", accentLight: "#4d4947", aegis: "#a0ca92", rogue: "#ee6018", ok: "#a0ca92",
   warn: "#c9a27e", bad: "#ee6018", muted: "#8a8380", grid: "#1d1a18", line: "#3d3a39" };
+export function syncChartPalette() {        // called by App whenever the theme changes, before pages re-render
+  const p = palette();
+  Object.assign(C, { ink: p.ink, accent: p.ink, accentLight: p.lineStrong, aegis: p.ok, rogue: p.bad, ok: p.ok, warn: p.warn, bad: p.bad,
+    muted: p.muted, grid: p.grid, line: p.lineStrong });
+  Object.assign(axis, { stroke: p.muted, axisLine: { stroke: p.lineStrong } });
+  Object.assign(tip.contentStyle, { background: p.bg, border: `1px solid ${p.lineStrong}`, color: p.ink });
+  Object.assign(tip.itemStyle, { color: p.ink });
+  Object.assign(tip.labelStyle, { color: p.muted });
+}
 export const ANIM = { isAnimationActive: true, animationDuration: 1100, animationEasing: "ease-out" };
 const INK = C.ink, GRID = C.grid, MUTED = C.muted;
 export const axis = { stroke: MUTED, fontSize: 11.5, tickLine: false, axisLine: { stroke: C.line } };
@@ -33,11 +43,11 @@ export function ResilienceGauge({ value, prev, size = 170 }) {
   const color = v >= 80 ? C.ok : v >= 60 ? C.warn : C.bad;
   return (
     <svg width={size} height={size} viewBox="0 0 180 180" role="img" aria-label={`Resilience score ${value ?? "unknown"} out of 100`}>
-      <circle cx="90" cy="90" r={r} fill="none" stroke="#1d1a18" strokeWidth="12" />
+      <circle cx="90" cy="90" r={r} fill="none" stroke={C.grid} strokeWidth="12" />
       <circle cx="90" cy="90" r={r} fill="none" stroke={color} strokeWidth="12" transform="rotate(-90 90 90)"
         strokeDasharray={c} strokeDashoffset={c * (1 - v / 100)} style={{ animation: "gaugeIn 1.4s cubic-bezier(0.16,1,0.3,1) both", "--c": c }} />
-      <text x="90" y="98" textAnchor="middle" fontFamily="Geist" fontWeight="400" fontSize="46" letterSpacing="-1.5" fill={INK}>{value ?? "—"}</text>
-      <text x="90" y="122" textAnchor="middle" fontFamily="Geist Mono" fontSize="11" fill={MUTED}>of 100{prev != null ? ` · was ${prev}` : ""}</text>
+      <text x="90" y="98" textAnchor="middle" fontFamily="Geist" fontWeight="400" fontSize="46" letterSpacing="-1.5" fill={C.ink}>{value ?? "—"}</text>
+      <text x="90" y="122" textAnchor="middle" fontFamily="Geist Mono" fontSize="11" fill={C.muted}>of 100{prev != null ? ` · was ${prev}` : ""}</text>
     </svg>
   );
 }
